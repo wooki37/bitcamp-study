@@ -18,5 +18,9 @@ public class Exam0210 {
     int score;
     
     score = 100;
+    System.out.println(age);
+    System.out.println(weight);
+    System.out.println(height);
+    System.out.println(score);
   }
 }

@@ -13,7 +13,7 @@ public class Exam0130 {
     // 날짜 및 시간 옵션
     // Y : 날짜 및 시각 데이터에서 년도를 추출하여 4자리로 표현한다.
     // y : 날짜 및 시각 데이터에서 년도를 추출하여 뒤의 2자리로 표현한다.
-    System.out.printf("%1$tY, %1$ty\n", today);
+    System.out.printf("%1$tY, %1$ty\n", today); // 1$ : 콤마(,) 다음에 첫번째 값 = 'today'
 
     // B : 날짜 및 시각 데이터에서 월을 추출하여 전체 이름으로 표현한다. ex) January
     // b : 날짜 및 시각 데이터에서 월을 추출하여 단축 이름으로 표현한다. ex) Jan

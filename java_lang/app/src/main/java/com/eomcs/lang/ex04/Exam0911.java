@@ -13,8 +13,8 @@ public class Exam0911 {
     int i = 98765678; // 4byte(약 -21억 ~ +21억)
     long l = 18_2345_3456_4567_5678L; // 8byte(약 -922경 ~ 922경)
 
-    float f;
-    double d;
+    float f;  // 4byte
+    double d; // 8byte
 
     // 주의!
     // - float의 자릿수가 넘어가는 정수를 저장하는 경우 값이 짤릴 수 있다.

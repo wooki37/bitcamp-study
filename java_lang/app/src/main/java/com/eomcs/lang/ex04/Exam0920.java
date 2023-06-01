@@ -4,14 +4,14 @@ package com.eomcs.lang.ex04;
 //
 public class Exam0920 {
   public static void main(String[] args) {
-    byte b = 100;
-    short s = 100;
-    int i = 98765678;
-    long l = 98765678;
-    char c = 100;
+    byte b = 100; // 1byte
+    short s = 100;  // 2byte
+    int i = 98765678; // 4byte
+    long l = 98765678;  // 8byte
+    char c = 100; // 2byte
 
-    float f;
-    double d;
+    float f;  // 4byte
+    double d; // 8byte
 
     // 정수 변수의 값을 부동소수점 변수에 저장할 때 값이 짤릴 수 있다.
     //

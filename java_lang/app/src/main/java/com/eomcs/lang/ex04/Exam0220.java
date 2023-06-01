@@ -13,5 +13,7 @@ public class Exam0220 {
     
     //항상 변수가 선언된 다음에 사용해야 한다.
     count = 50; // 옳다!
+
+    System.out.println(count);
   }
 }

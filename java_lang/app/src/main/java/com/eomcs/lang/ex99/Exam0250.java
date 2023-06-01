@@ -7,7 +7,7 @@ public class Exam0250 {
     java.util.Scanner keyboardScanner = new java.util.Scanner(System.in);
 
     System.out.print("나이, 이름, 취업여부? ");
-    int age = keyboardScanner.nextInt();
+    int age = keyboardScanner.nextInt();  // 'enter'를 입력할 때까지 계속 기다림
 
     // 한 개의 토큰을 읽을 때 유용하다.
     String name = keyboardScanner.next();

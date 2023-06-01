@@ -5,11 +5,10 @@ package com.eomcs.lang.ex05;
 public class Exam0352 {
   public static void main(String[] args) {
     // % 연산자를 이용하여 짝수/홀수 알아내기
-    System.out.println(57 % 2 == 0 ? "짝수" : "홀수");
+    System.out.println(57 % 2 == 0 ? "짝수" : "홀수"); // 조건이 참이면 왼쪽에 값 : 거짓이면 오른쪽에 값
 
     // & 연산자를 이용하여 짝수/홀수 알아내기
     System.out.println((57 & 0x1) == 0 ? "짝수" : "홀수");
 
   }
 }
-

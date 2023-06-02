@@ -6,15 +6,15 @@ public class Exam0610 {
 
   // static void f1(int x, int y) {
   // int b = 5; // bytecode 확인해보기!
-  // int temp = b; 1. b 값을 임시변수 temp에 담고
-  // b += 1; 2. b 값을 1 증감 시킵니다.
-  // System.out.println(temp); 3. 그리고 temp라는 변수를 호출합니다.
+  // int temp = b; // 1. b 값을 임시변수 temp에 담고
+  // b += 1; // 2. b 값을 1 증감 시킵니다.
+  // System.out.println(temp); // 3. 그리고 temp라는 변수를 호출합니다.
 
   // System.out.println(b++); // => 컴파일 될 때 1번, 2번, 3번을 수행하는거와 똑같음, 이거는 후위연산자!
 
-  // b += 1; 1. b를 증감시킨 후에
-  // System.out.println(b); 2. b를 호출한다.
-  // System.out.println(++b); => 이거는 전위연산자!
+  // b += 1; // 1. b를 증감시킨 후에
+  // System.out.println(b); // 2. b를 호출한다.
+  // System.out.println(++b); // => 이거는 전위연산자!
 
   // }
 

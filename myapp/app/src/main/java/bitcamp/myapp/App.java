@@ -5,67 +5,90 @@ import java.util.Scanner;
 
 public class App {
   public static void main(String[] args) {
-    System.out.println("나의 목록 관리 시스템"); // <- 문자열 스트림 리터럴
-    System.out.println("----------------------------");
-
+    printTitle();
     // 키보드 스캐너 준비
     Scanner scanner = new Scanner(System.in);
 
-    int[] no = new int[3];
-    String[] name = new String[3];
-    int[] age = new int[3];
-    boolean[] working = new boolean[3];
-    char[] gender = new char[3];
-    float[] leftEye = new float[3];
-    float[] rightEye = new float[3];
+    final int MAX_SIZE = 100;
+    int userid = 1;
+    int length = 0;
 
-    for (int count = 0; count < 3; count++) {
-      // count++; => == coundt = count + 1 == count += 1 # 세 함수 다 같다
+    int[] no = new int[MAX_SIZE];
+    String[] name = new String[MAX_SIZE];
+    String[] email = new String[MAX_SIZE];
+    String[] password = new String[MAX_SIZE];
+    char[] gender = new char[MAX_SIZE];
 
-      System.out.print("번호? ");
-      no[count] = scanner.nextInt();
-
-      System.out.print("이름? ");
-      name[count] = scanner.next();
-
-      System.out.print("나이? ");
-      age[count] = scanner.nextInt();
-
-      System.out.print("재직중? ");
-      working[count] = scanner.nextBoolean();
-
-      System.out.print("성별(남자:M, 여자:W)? ");
-      String str = scanner.next();
-      gender[count] = str.charAt(0);
-
-      System.out.print("시력(왼쪽, 오른쪽)? ");
-      leftEye[count] = scanner.nextFloat();
-      rightEye[count] = scanner.nextFloat();
-
+    for (int i = 0; i < MAX_SIZE; i++) {
+      inputMember(scanner, i, name, email, password, gender, userid++, no);
+      length++;
+      if (!promptContinue(scanner)) {
+        break;
+      }
     }
 
-    System.out.println("------------------------------");
-
-    // int no = 100;
-    // int age = 20;
-    // String name = "홍길동";
-    // boolean working = true;
-    // char gender = 'M';
-    // float leftEye = 1.5f;
-    // float rightEye = 1.0f;
-    for (int count = 0; count < 3; count++) {
-      // 1번째
-      System.out.printf("번호: %d\n", no);
-      System.out.println(no);
-      System.out.printf("이름: %s\n", name);
-      System.out.println();
-      System.out.println("나이: %d\n" + age);
-      System.out.printf("재직자: %b\n", working); // '\n'은 줄바꿈\
-      System.out.printf("성별(남자(M), 여자(W): %c\n", gender);
-      System.out.printf("좌우시력: %.1f,%.1f\n", leftEye, rightEye);
-    }
+    printMembers(length, no, name, email, gender);
 
     scanner.close();
+  }
 
+  static void printTitle() {
+    System.out.println("나의 목록 관리 시스템"); // <- 문자열 스트림 리터럴
+    System.out.println("----------------------------");
+  }
+
+  static void inputMember(Scanner scanner, int i, String[] name,
+      String email[], String[] password, char[] gender, int userid, int[] no) {
+
+    System.out.print("이름? ");
+    name[i] = scanner.next();
+
+    System.out.print("이메일? ");
+    email[i] = scanner.next();
+
+    System.out.print("암호? ");
+    password[i] = scanner.next();
+
+    loop: while (true) {
+      System.out.println("성별: ");
+      System.out.println(" 1. 남자");
+      System.out.println(" 2. 여자");
+      System.out.print("> ");
+      String menuNo = scanner.next();
+      scanner.nextLine(); // 입력 값(token)을 읽고 난 후에 남아 있느 줄바꿈 코드를 제거한다.
+
+      switch (menuNo) {
+        case "1":
+          gender[i] = 'M';
+          break loop;
+        case "2":
+          gender[i] = 'W';
+          break loop;
+        default:
+          System.out.println("무효한 번호입니다.");
+      }
+    }
+
+    no[i] = userid++;
+  }
+
+  static boolean promptContinue(Scanner scanner) {
+    System.out.print("계속 하시겠습니까?(Y/n) ");
+    String response = scanner.nextLine();
+    if (!response.equals("") && !response.equalsIgnoreCase("Y")) {
+      return false;
+    }
+    return true;
+  }
+
+  static void printMembers(int length, int[] no, String[] name,
+      String[] email, char[] gender) {
+    System.out.println("------------------------------");
+    System.out.println("번호, 이름, 이메일, 성별");
+    System.out.println("------------------------------");
+
+    for (int i = 0; i < length; i++) {
+      System.out.printf("%d,    %s,    %s,    %c\n", no[i], name[i], email[i], gender[i]);
+    }
   }
 }

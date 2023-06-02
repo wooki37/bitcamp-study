@@ -19,10 +19,9 @@ public class Exam0510 {
 
 // 표현식(expression)?
 // - 작업을 수행한 후 결과를 리턴하는 문장이다.
-//
+
 // 문장(statement)?
 // - 작업을 수행시키는 명령이다.
-//
+
 // 문장과 표현식의 관계
 // - statement 중에서 결과를 리턴하는 statement를 expression이라 부른다.
-//

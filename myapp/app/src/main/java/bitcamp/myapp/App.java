@@ -19,7 +19,7 @@ public class App {
     System.out.println("6. 종료");
 
     while (true) {
-      String menuNo = Prompt.inputString("> ");
+      String menuNo = Prompt.inputString("메인> ");
       if (menuNo.equals("6")) {
         break;
       } else if (menuNo.equals("menu")) {
@@ -28,6 +28,12 @@ public class App {
         MemberHandler.inputMember();
       } else if (menuNo.equals("2")) {
         MemberHandler.printMembers();
+      } else if (menuNo.equals("3")) {
+        MemberHandler.viewMember();
+      } else if (menuNo.equals("4")) {
+        MemberHandler.updateMember();
+      } else if (menuNo.equals("5")) {
+        MemberHandler.deleteMember();
       } else {
         System.out.println(menuNo);
       }

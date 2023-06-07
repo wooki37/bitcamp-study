@@ -8,18 +8,41 @@ public class App {
 
   public static void main(String[] args) {
     printTitle();
-    // 키보드 스캐너 준비
 
-    while (MemberHandler.available()) {
-      MemberHandler.inputMember();
-      if (!promptContinue()) {
+    printMenu();
+
+    System.out.println("1. 회원등록");
+    System.out.println("2. 회원목록");
+    System.out.println("3. 회원조회");
+    System.out.println("4. 회원변경");
+    System.out.println("5. 회원삭제");
+    System.out.println("6. 종료");
+
+    while (true) {
+      String menuNo = Prompt.inputString("> ");
+      if (menuNo.equals("6")) {
         break;
+      } else if (menuNo.equals("menu")) {
+        printMenu();
+      } else if (menuNo.equals("1")) {
+        MemberHandler.inputMember();
+      } else if (menuNo.equals("2")) {
+        MemberHandler.printMembers();
+      } else {
+        System.out.println(menuNo);
       }
     }
 
-    MemberHandler.printMembers();
-
     Prompt.close();
+  }
+
+  static void printMenu() {
+    System.out.println("1. 회원등록");
+    System.out.println("2. 회원목록");
+    System.out.println("3. 회원조회");
+    System.out.println("4. 회원변경");
+    System.out.println("5. 회원삭제");
+    System.out.println("6. 종료");
   }
 
   static void printTitle() {

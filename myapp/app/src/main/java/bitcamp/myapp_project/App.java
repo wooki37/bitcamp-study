@@ -1,6 +1,6 @@
 package bitcamp.myapp_project;
 
-import bitcamp.myapp.handler.MemberHandler;
+import bitcamp.myapp_project.handler.AnimalHospital;
 import bitcamp.util.Prompt;
 
 public class App {
@@ -9,14 +9,14 @@ public class App {
 
     printTitle();
 
-    while (MemberHandler.available()) {
-      MemberHandler.inputMember();
+    while (AnimalHospital.available()) {
+      AnimalHospital.inputMember();
       if (!promptContinue()) {
         break;
       }
     }
 
-    MemberHandler.printMembers();
+    AnimalHospital.printMembers();
 
     Prompt.close();
   }

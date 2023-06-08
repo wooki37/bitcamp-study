@@ -20,7 +20,7 @@ public class App {
       } else if (menuNo.equals("1")) {
         AnimalHospital.inputMember();
       } else if (menuNo.equals("2")) {
-        AnimalHospital.inputMember();
+        AnimalHospital.printMembers();
       } else if (menuNo.equals("3")) {
         AnimalHospital.viewMember();
       } else if (menuNo.equals("4")) {
@@ -47,13 +47,5 @@ public class App {
   static void printTitle() {
     System.out.println("동물병원 보호자 목록");
     System.out.println("----------------------------------");
-  }
-
-  static boolean promptContinue() {
-    String response = Prompt.inputString("입력이 끝나셨습니까?(Y/n) ");
-    if (!response.equals("") && !response.equalsIgnoreCase("Y")) {
-      return false;
-    }
-    return true;
   }
 }

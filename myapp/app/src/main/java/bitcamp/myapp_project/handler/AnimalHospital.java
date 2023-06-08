@@ -25,7 +25,7 @@ public class AnimalHospital {
     m.no = Integer.parseInt(Prompt.inputString("보호자ID? "));
     m.no = Integer.parseInt(Prompt.inputString("환자ID? "));
     m.name = Prompt.inputString("환자명? ");
-    m.breeds = Prompt.inputString("품종? ");
+    m.breeds = getMemberBreed();
     m.age = Integer.parseInt(Prompt.inputString("나이? "));
     m.address = Prompt.inputString("주소? ");
     m.phone = Integer.parseInt(Prompt.inputString("연락처? "));
@@ -35,14 +35,37 @@ public class AnimalHospital {
     members[length++] = m;
   }
 
+  private static String getMemberBreed() {
+    boolean isValidNum = true; // 입력된 번호가 유효한지 여부
+    String num = null;
+    String breedType = null;
+    while (isValidNum) {
+
+      num = Prompt.inputString("품종? 1. 강아지, 2.고양이. 3.직접입력").trim(); // trim() : 입력된 문자열의 양쪽 공백 제거
+      if ("1".equals(num)) {
+        breedType = "강아지";
+        isValidNum = false;
+      } else if ("2".equals(num)) {
+        breedType = "고양이";
+        isValidNum = false;
+      } else if ("3".equals(num)) {
+        breedType = Prompt.inputString("품종 타입을 직접 입력해주세요 > ");
+        isValidNum = false;
+      } else { // isValidNum 변수는 여전히 true이므로 루프가 반복됩니다.
+        System.out.println("입력에 없는 번호입니다. 다시 입력해주세요");
+      }
+    }
+    return breedType;
+  }
+
   public static void printMembers() {
-    System.out.println("--------------------------------------------------");
-    System.out.println("보호자ID, 환자ID, 환자명, 품종, 나이, 주소, 연락처, 성별");
-    System.out.println("---------------------------------------------------");
+    System.out.println("-----------------------------------------------------------------------");
+    System.out.println("보호자ID/ 환자ID/  환자명/  품종/  나이/  주소/       연락처/     성별");
+    System.out.println("-----------------------------------------------------------------------");
 
     for (int i = 0; i < length; i++) {
       Member m = members[i];
-      System.out.printf("%d, %d, %s, %s, %d, %s, %d, %s\n", m.no, m.no, m.name, m.breeds,
+      System.out.printf("%d/         %d/     %s/  %s/  %d/  %s/ %d/ %s\n", m.no, m.no, m.name, m.breeds,
           m.age, m.address, m.phone, toGenderString(m.gender));
     }
   }
@@ -67,7 +90,7 @@ public class AnimalHospital {
   }
 
   public static String toGenderString(char gender) {
-    return gender == 'M' ? "남성" : "여성";
+    return gender == 'M' ? "수컷" : "암컷";
   }
 
   public static void updateMember() {
@@ -91,7 +114,7 @@ public class AnimalHospital {
         return;
       }
     }
-    System.out.println("해당 번호의 회원이 없습니다.");
+    System.out.println("해당 번호의 ID가 없습니다.");
   }
 
   private static char inputGender(char gender) {
@@ -103,8 +126,8 @@ public class AnimalHospital {
     }
     while (true) {
       String menuNo = Prompt.inputString(label +
-          " 1. 남자\n" +
-          " 2. 여자\n" +
+          " 1. 수컷\n" +
+          " 2. 암컷\n" +
           "> ");
 
       switch (menuNo) {
@@ -123,7 +146,7 @@ public class AnimalHospital {
 
     int deletedIndex = indexOf(memberNo);
     if (deletedIndex == -1) {
-      System.out.println("해당 번호의 회원이 없습니다.");
+      System.out.println("해당 번호의 ID가 없습니다.");
       return;
     }
 

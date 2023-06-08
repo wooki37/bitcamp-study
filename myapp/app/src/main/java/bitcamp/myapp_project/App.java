@@ -36,16 +36,16 @@ public class App {
   }
 
   static void printMenu() {
-    System.out.println("1. 회원등록");
-    System.out.println("2. 회원목록");
-    System.out.println("3. 회원조회");
-    System.out.println("4. 회원변경");
-    System.out.println("5. 회원삭제");
+    System.out.println("1. 환자등록");
+    System.out.println("2. 환자목록");
+    System.out.println("3. 환자조회");
+    System.out.println("4. 정보변경");
+    System.out.println("5. 정보삭제");
     System.out.println("6. 종료");
   }
 
   static void printTitle() {
-    System.out.println("동물병원 보호자 목록");
+    System.out.println("동물병원 보호자 및 환자 목록");
     System.out.println("----------------------------------");
   }
 }

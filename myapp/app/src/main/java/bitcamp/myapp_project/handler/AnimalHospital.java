@@ -8,12 +8,7 @@ public class AnimalHospital {
 
   static final int MAX_SIZE = 100;
   static Member[] members = new Member[MAX_SIZE];
-
-  static int userId = 1;
   static int length = 0;
-
-  static final char MALE = 'M';
-  static final char FEMALE = 'W';
 
   public static void inputMember() {
     if (!available()) {
@@ -22,16 +17,15 @@ public class AnimalHospital {
     }
 
     Member m = new Member();
-    m.no = Integer.parseInt(Prompt.inputString("보호자ID? "));
-    m.no = Integer.parseInt(Prompt.inputString("환자ID? "));
-    m.name = Prompt.inputString("환자명? ");
-    m.breeds = getMemberBreed();
-    m.age = Integer.parseInt(Prompt.inputString("나이? "));
-    m.address = Prompt.inputString("주소? ");
-    m.phone = Integer.parseInt(Prompt.inputString("연락처? "));
-    m.gender = inputGender((char) 0);
+    m.setNo(Integer.parseInt(Prompt.inputString("보호자ID? ")));
+    m.setNo(Integer.parseInt(Prompt.inputString("환자ID? ")));
+    m.setName(Prompt.inputString("환자명? "));
+    m.setBreeds(getMemberBreed());
+    m.setAge(Integer.parseInt(Prompt.inputString("나이? ")));
+    m.setAddress(Prompt.inputString("주소? "));
+    m.setPhone(Integer.parseInt(Prompt.inputString("연락처?(010) ")));
+    m.setGender(inputGender((char) 0));
 
-    m.no = userId++;
     members[length++] = m;
   }
 
@@ -60,13 +54,13 @@ public class AnimalHospital {
 
   public static void printMembers() {
     System.out.println("-----------------------------------------------------------------------");
-    System.out.println("보호자ID/ 환자ID/  환자명/  품종/  나이/  주소/       연락처/     성별");
+    System.out.println("보호자ID/환자ID/  환자명/ 품종/ 나이/ 주소/ 연락처/ 성별");
     System.out.println("-----------------------------------------------------------------------");
 
     for (int i = 0; i < length; i++) {
       Member m = members[i];
-      System.out.printf("%d/         %d/     %s/  %s/  %d/  %s/ %d/ %s\n", m.no, m.no, m.name, m.breeds,
-          m.age, m.address, m.phone, toGenderString(m.gender));
+      System.out.printf("%d/,    %d/,%s/,  %s/,  %d/, %s/,(010)%d/, %s\n", m.getNo(), m.getNo(), m.getName(),
+          m.getBreeds(), m.getAge(), m.getAddress(), m.getPhone(), toGenderString(m.getGender()));
     }
   }
 
@@ -74,15 +68,15 @@ public class AnimalHospital {
     String memberNo = Prompt.inputString("번호? ");
     for (int i = 0; i < length; i++) {
       Member m = members[i];
-      if (m.no == Integer.parseInt(memberNo)) {
-        System.out.printf("보호자ID: %d\n", m.no);
-        System.out.printf("환자ID: %d\n", m.no);
-        System.out.printf("환자명: %s\n", m.name);
-        System.out.printf("품종: %s\n", m.breeds);
-        System.out.printf("나이: %d\n", m.age);
-        System.out.printf("주소: %s\n", m.address);
-        System.out.printf("연락처: %d\n", m.phone);
-        System.out.printf("성별: %s\n", toGenderString(m.gender));
+      if (m.getNo() == Integer.parseInt(memberNo)) {
+        System.out.printf("보호자ID: %d\n", m.getNo());
+        System.out.printf("환자ID: %d\n", m.getNo());
+        System.out.printf("환자명: %s\n", m.getName());
+        System.out.printf("품종: %s\n", m.getBreeds());
+        System.out.printf("나이: %d\n", m.getAge());
+        System.out.printf("주소: %s\n", m.getAddress());
+        System.out.printf("연락처: %d\n", m.getPhone());
+        System.out.printf("성별: %s\n", toGenderString(m.getGender()));
         return;
       }
     }
@@ -97,20 +91,20 @@ public class AnimalHospital {
     String memberNo = Prompt.inputString("보호자ID 번호? ");
     for (int i = 0; i < length; i++) {
       Member m = members[i];
-      if (m.no == Integer.parseInt(memberNo)) {
-        System.out.printf("환자ID(%d)? ", m.no);
-        m.name = Prompt.inputString(" ");
-        System.out.printf("환자명(%s)? ", m.name);
-        m.name = Prompt.inputString(" ");
-        System.out.printf("품종(%s)? ", m.breeds);
-        m.breeds = Prompt.inputString(" ");
-        System.out.printf("나이(%d)? ", m.age);
-        m.age = Integer.parseInt(Prompt.inputString(" "));
-        System.out.printf("주소(%s)? ", m.address);
-        m.address = Prompt.inputString(" ");
-        System.out.printf("연락처(%d)? ", m.phone);
-        m.phone = Integer.parseInt(Prompt.inputString(" "));
-        m.gender = inputGender(m.gender);
+      if (m.getNo() == Integer.parseInt(memberNo)) {
+        System.out.printf("환자ID(%d)? ", m.getNo());
+        m.setName(Prompt.inputString(" "));
+        System.out.printf("환자명(%s)? ", m.getName());
+        m.setName(Prompt.inputString(" "));
+        System.out.printf("품종(%s)? ", m.getBreeds());
+        m.setBreeds(Prompt.inputString(" "));
+        System.out.printf("나이(%d)? ", m.getAge());
+        m.setAge(Integer.parseInt(Prompt.inputString(" ")));
+        System.out.printf("주소(%s)? ", m.getAddress());
+        m.setAddress(Prompt.inputString(" "));
+        System.out.printf("연락처(%d)? ", m.getPhone());
+        m.setPhone(Integer.parseInt(Prompt.inputString(" ")));
+        m.setGender(inputGender(m.getGender()));
         return;
       }
     }
@@ -132,9 +126,9 @@ public class AnimalHospital {
 
       switch (menuNo) {
         case "1":
-          return MALE;
+          return Member.MALE;
         case "2":
-          return FEMALE;
+          return Member.FEMALE;
         default:
           System.out.println("무효한 번호입니다.");
       }
@@ -161,7 +155,7 @@ public class AnimalHospital {
   private static int indexOf(int memberNo) {
     for (int i = 0; i < length; i++) {
       Member m = members[i];
-      if (m.no == memberNo) {
+      if (m.getNo() == memberNo) {
         return i;
       }
     }

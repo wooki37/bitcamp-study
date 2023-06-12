@@ -166,3 +166,6 @@
     - GoF의 Design Patters: Factory Method 패턴 소개
     - 생성자 사용법
     - private/public, setter/getter 사용법
+
+### 14일(6/12,월)
+

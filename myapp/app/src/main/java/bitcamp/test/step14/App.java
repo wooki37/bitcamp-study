@@ -3,7 +3,7 @@ package bitcamp.test.step14;
 import java.net.Socket;
 import bitcamp.test.step14.vo.Score;
 
-// 14) 외부접근 차단과 값 꺼내기
+// 14) 외부접근 차단과 값 꺼내기 : private, getter
 public class App {
 
   public static void main(String[] args) {

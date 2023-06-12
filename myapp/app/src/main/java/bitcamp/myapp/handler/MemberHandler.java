@@ -1,17 +1,13 @@
 package bitcamp.myapp.handler;
 
-import bitcamp.util.Prompt;
 import bitcamp.myapp.vo.Member;
+import bitcamp.util.Prompt;
 
 public class MemberHandler {
 
   static final int MAX_SIZE = 100;
   static Member[] members = new Member[MAX_SIZE];
-  static int userid = 1;
   static int length = 0;
-
-  static final char MALE = 'M';
-  static final char FEMALE = 'W';
 
   public static void inputMember() {
     if (!available()) {
@@ -20,13 +16,12 @@ public class MemberHandler {
     }
 
     Member m = new Member();
-    m.name = Prompt.inputString("이름? ");
-    m.email = Prompt.inputString("이메일? ");
-    m.password = Prompt.inputString("암호? ");
-    m.gender = inputGender((char) 0);
-    m.no = userid++;
+    m.setName(Prompt.inputString("이름? "));
+    m.setEmail(Prompt.inputString("이메일? "));
+    m.setPassword(Prompt.inputString("암호? "));
+    m.setGender(inputGender((char) 0));
 
-    // 위에서 만든 Memver 인스턴스의 주소를 읽어버리지 않게
+    // 위에서 만든 Member 인스턴스의 주소를 읽어버리지 않게
     // 레퍼런스 배열에 담는다.
     members[length++] = m;
 
@@ -39,9 +34,8 @@ public class MemberHandler {
 
     for (int i = 0; i < length; i++) {
       Member m = members[i];
-      System.out.printf("%d,    %s,    %s,    %s\n",
-          m.no, m.name, m.email,
-          toGenderString(m.gender));
+      System.out.printf("%d,    %s,    %s,    %s\n", m.getNo(), m.getName(), m.getEmail(),
+          toGenderString(m.getGender()));
     }
   }
 
@@ -50,10 +44,12 @@ public class MemberHandler {
     // 입력 받은 번호를 가지고 배열에서 해당 회원을 찾아야 한다.
     for (int i = 0; i < length; i++) {
       Member m = members[i];
-      if (m.no == Integer.parseInt(memberNo)) { // Integer.parseInt(Java lang pkg에 있음) = 문자형을 숫자형으로 변환
-        System.out.printf("이름: %s\n", m.name);
-        System.out.printf("이메일: %s\n", m.email);
-        System.out.printf("성별: %c\n", toGenderString(m.gender));
+      if (m.getNo() == Integer.parseInt(memberNo)) { // Integer.parseInt(Java lang pkg에 있음) = 문자형을
+                                                     // 숫자형으로
+        // 변환
+        System.out.printf("이름: %s\n", m.getName());
+        System.out.printf("이메일: %s\n", m.getEmail());
+        System.out.printf("성별: %c\n", toGenderString(m.getGender()));
         return;
       }
     }
@@ -93,14 +89,14 @@ public class MemberHandler {
     String memberNo = Prompt.inputString("번호? ");
     for (int i = 0; i < length; i++) {
       Member m = members[i];
-      if (m.no == Integer.parseInt(memberNo)) {
-        System.out.printf("이름(%s)? ", m.name);
-        m.name = Prompt.inputString("");
-        System.out.printf("이메일(%s)? ", m.email);
-        m.email = Prompt.inputString("");
+      if (m.getNo() == Integer.parseInt(memberNo)) {
+        System.out.printf("이름(%s)? ", m.getName());
+        m.setName(Prompt.inputString(""));
+        System.out.printf("이메일(%s)? ", m.getEmail());
+        m.setEmail(Prompt.inputString(""));
         System.out.printf("새암호? ");
-        m.password = Prompt.inputString("");
-        m.gender = inputGender(m.gender);
+        m.setPassword(Prompt.inputString(""));
+        m.setGender(inputGender(m.getGender()));
         return;
       }
     }
@@ -114,17 +110,15 @@ public class MemberHandler {
     } else {
       label = String.format("성별(%s)?\n", toGenderString(gender));
     }
-    loop: while (true) {
-      String menuNo = Prompt.inputString(label +
-          " 1. 남자\n" +
-          " 2. 여자\n" +
-          "> ");
+
+    while (true) {
+      String menuNo = Prompt.inputString(label + " 1. 남자\n" + " 2. 여자\n" + "> ");
 
       switch (menuNo) {
         case "1":
-          return MALE;
+          return Member.MALE;
         case "2":
-          return FEMALE;
+          return Member.FEMALE;
         default:
           System.out.println("무효한 번호입니다.");
       }
@@ -132,7 +126,7 @@ public class MemberHandler {
   }
 
   public static void deleteMember() {
-    // 삭제하려는 회원의 정보가 들어 있는 인덱스를 알아낸다.
+
     int memberNo = Prompt.inputInt("번호? ");
 
     int deletedIndex = indexOf(memberNo);
@@ -151,7 +145,7 @@ public class MemberHandler {
   private static int indexOf(int memberNo) {
     for (int i = 0; i < length; i++) {
       Member m = members[i];
-      if (m.no == memberNo) {
+      if (m.getNo() == memberNo) {
         return i;
       }
     }

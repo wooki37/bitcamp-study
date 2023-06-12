@@ -19,7 +19,7 @@ public class App {
       this.aver = this.sum / 3f;
     }
 
-    // 팩토리 메서드
+    // 팩토리 메서드 => 인스턴스를 사용하지 않음, static 메서드를 사용
     static Score create(String name, int kor, int eng, int math) {
       Score s = new Score();
       s.name = name;

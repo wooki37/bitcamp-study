@@ -13,7 +13,7 @@ public class App {
     int sum;
     float aver;
 
-    void compute() {
+    void compute() { // this 내장 변수
       this.sum = this.kor + this.eng + this.math;
       this.aver = this.sum / 3f;
     }

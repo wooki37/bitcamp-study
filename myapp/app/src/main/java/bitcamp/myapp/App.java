@@ -11,13 +11,6 @@ public class App {
 
     printMenu();
 
-    System.out.println("1. 회원등록");
-    System.out.println("2. 회원목록");
-    System.out.println("3. 회원조회");
-    System.out.println("4. 회원변경");
-    System.out.println("5. 회원삭제");
-    System.out.println("6. 종료");
-
     while (true) {
       String menuNo = Prompt.inputString("메인> ");
       if (menuNo.equals("6")) {

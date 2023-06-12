@@ -2,7 +2,7 @@ package bitcamp.test.step11;
 
 import java.net.Socket;
 
-// 11) 생성자 도입: 인스턴스 변수를 보다 쉽게 초기화시키기
+// 11) 생성자 도입: 인스턴스 변수를 보다 쉽게 초기화 시키기
 public class App {
 
   static class Score {
@@ -13,7 +13,7 @@ public class App {
     int sum;
     float aver;
 
-    // 생성자 : 인스턴스를 생성한 직후 호출하는 메서드
+    // 생성자 : 인스턴스를 생성한 직후 호출하는 메서드, 자바에서는 1개 이상의 생성자가 반드시 존재한다.
     Score(String name, int kor, int eng, int math) {
       this.name = name;
       this.kor = kor;

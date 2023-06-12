@@ -1,6 +1,6 @@
 package bitcamp.test.step12;
 
-class Score {
+class Score { // 탑 레벨 클래스, static 붙일 수 없음
   String name;
   int kor;
   int eng;

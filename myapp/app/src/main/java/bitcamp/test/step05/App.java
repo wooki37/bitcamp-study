@@ -5,7 +5,7 @@ import java.net.Socket;
 // 5) 출력 기능을 별도의 메서드로 분리(중첩클래스; 스태틱 클래스)
 public class App {
 
-  static class Score {
+  static class Score { // 스태틱 중첩 클래스
     String name;
     int kor;
     int eng;

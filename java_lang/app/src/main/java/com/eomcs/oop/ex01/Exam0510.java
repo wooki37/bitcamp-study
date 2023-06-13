@@ -8,11 +8,13 @@ package com.eomcs.oop.ex01;
 // - 단독으로 선언하는 클래스이다.
 // - "패키지 멤버 클래스"라 부른다.
 // - 물론 이 예제처럼 한 파일에 여러 개의 클래스를 선언할 수 있지만,
-//   보통은 한 파일에 한 클래스를 선언한다.
+// 보통은 한 파일에 한 클래스를 선언한다.
 // - 패키지 멤버 클래스는 접근 권한이 있다면 누구든 사용할 수 있다.
 //
 // bin/main/com/eomcs/oop/ex01/A.class
-class A {}
+class A {
+} // package 안에서만 사용 가능 - private
+
 
 // => bin/main/com/eomcs/oop/ex01/Exam0510.class
 public class Exam0510 {
@@ -21,23 +23,25 @@ public class Exam0510 {
   // - 다른 클래스 안에 정의된 클래스
   // - 그 클래스 안에서만 사용된다.
   // - 종류:
-  //   1) 스태틱 중첩 클래스(static nested class)
-  //   2) 논-스태틱 중첩 클래스(non-static nested class = inner class)
-  //   3) 로컬 클래스(local class)
-  //   4) 익명 클래스(anonymous class)
+  // 1) 스태틱 중첩 클래스(static nested class)
+  // 2) 논-스태틱 중첩 클래스(non-static nested class = inner class)
+  // 3) 로컬 클래스(local class)
+  // 4) 익명 클래스(anonymous class)
   //
 
   // 1) 스태틱 중첩 클래스
   // - 이 클래스를 소유하고 있는 클래스 뿐만 아니라 다른 클래스도 사용할 수 있다.
   //
   // bin/main/com/eomcs/oop/ex01/Exam0510$B.class
-  static class B {}
+  static class B {
+  }
 
   // 2) 논-스태틱 중첩 클래스 = inner class
   // - 특정 인스턴스에 종속된 클래스인 경우 논-스태틱 중첩 클래스로 정의한다.
   //
   // bin/main/com/eomcs/oop/ex01/Exam0510$C.class
-  class C {}
+  class C {
+  }
 
   public static void main(String[] args) {
     // 3) 로컬 클래스(local class)
@@ -45,7 +49,8 @@ public class Exam0510 {
     // - 오직 그 메서드 블록 안에서만 사용된다.
     //
     // bin/main/com/eomcs/oop/ex01/Exam0510$1D.class
-    class D {}
+    class D {
+    }
 
     // 4) 익명 클래스(anonymouse class)
     // - 클래스 이름이 없는 중첩 클래스이다.
@@ -69,10 +74,10 @@ public class Exam0510 {
     B obj2 = new B();
 
     // 스태틱 멤버는 논-스태틱 중첩 클래스(인스턴스 멤버)를 사용할 수 없다.
-    //    C obj3 = new C(); // 컴파일 오류!
+    // C obj3 = new C(); // 컴파일 오류!
 
     // 다른 메서드에 정의된 로컬 클래스는 사용할 수 없다.
-    //    D obj4 = new D(); // 컴파일 오류!
+    // D obj4 = new D(); // 컴파일 오류!
 
   }
 

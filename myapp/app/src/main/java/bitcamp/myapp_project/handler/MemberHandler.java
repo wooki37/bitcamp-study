@@ -1,7 +1,5 @@
 package bitcamp.myapp_project.handler;
 
-import java.util.Scanner;
-
 import bitcamp.util.Prompt;
 
 public class MemberHandler {
@@ -27,10 +25,7 @@ public class MemberHandler {
 
     loop: while (true) {
 
-      String menuNo = Prompt.inputString("성별: \n" +
-          " 1. 남자\n" +
-          " 2. 여자\n" +
-          "> ");
+      String menuNo = Prompt.inputString("성별: \n" + " 1. 남자\n" + " 2. 여자\n" + "> ");
 
       switch (menuNo) {
         case "1":

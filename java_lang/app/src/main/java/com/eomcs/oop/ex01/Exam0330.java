@@ -1,6 +1,6 @@
 package com.eomcs.oop.ex01;
 
-//# 레퍼런스와 인스턴스 - 레퍼런스 카운트와 가비지
+// # 레퍼런스와 인스턴스 - 레퍼런스 카운트와 가비지
 //
 public class Exam0330 {
   public static void main(String[] args) {
@@ -14,7 +14,7 @@ public class Exam0330 {
     }
 
     Score s1 = new Score();
-    Score s2 = new Score();
+    Score s2 = new Score(); // '0' 로 바
 
     s2 = s1;
     // s1의 주소는 s2에도 저장되었다.

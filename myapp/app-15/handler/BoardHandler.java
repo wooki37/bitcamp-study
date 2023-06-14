@@ -1,6 +1,7 @@
-package bitcamp.myapp.handler;
+package bitcamp.myapp_project.handler;
 
-import bitcamp.myapp.vo.Board;
+import java.util.Scanner;
+import bitcamp.myapp_project.vo.Board;
 import bitcamp.util.Prompt;
 
 public class BoardHandler {
@@ -80,7 +81,6 @@ public class BoardHandler {
     }
     System.out.println("해당 번호의 게시글이 없습니다!");
   }
-
 
   public void deleteBoard() {
     int deletedIndex = indexOf(this.prompt.inputInt("번호? "));

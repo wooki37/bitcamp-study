@@ -1,6 +1,6 @@
-package bitcamp.myapp.handler;
+package bitcamp.myapp_project.handler;
 
-import bitcamp.myapp.vo.Board;
+import bitcamp.myapp_project.vo.Board;
 
 public class BoardList {
   private static final int DEFAULT_SIZE = 3;

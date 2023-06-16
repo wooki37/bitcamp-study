@@ -16,6 +16,24 @@ public class Board {
     this.createdDate = System.currentTimeMillis();
   }
 
+  public Board(int no) {
+    this.no = no;
+  }
+
+  public boolean equals(Object obj) {
+    if (obj == null) {
+      return false;
+    }
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+    Board board = (Board) obj;
+    if (this.getNo() != board.getNo()) {
+      return false;
+    }
+    return true;
+  }
+
   public int getNo() {
     return no;
   }

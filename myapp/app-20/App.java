@@ -1,11 +1,9 @@
-package bitcamp.myapp;
+package bitcamp.myapp_project;
 
-import bitcamp.myapp.handler.BoardHandler;
-import bitcamp.myapp.handler.Handler;
-import bitcamp.myapp.handler.MemberHandler;
-import bitcamp.util.ArrayList;
-import bitcamp.util.LinkedList;
+import bitcamp.myapp_project.handler.AnimalHospital;
+import bitcamp.myapp_project.handler.BoardHandler;
 import bitcamp.util.Prompt;
+import bitcamp.myapp_project.handler.Handler;
 
 public class App {
 
@@ -15,11 +13,9 @@ public class App {
     // => 기본 생성자는 Scanner를 키보드와 연결한다.
     Prompt prompt = new Prompt();
 
-    // 모든 핸들러는 Handler 규칙에 따라 정의되었기 때문에
-    // Handler 레퍼런스에 그 주소를 담을 수 있다.
-    Handler memberHandler = new MemberHandler(prompt, "일반회원", new ArrayList());
-    Handler boardHandler = new BoardHandler(prompt, "게시글", new LinkedList());
-    Handler readingHandler = new BoardHandler(prompt, "독서록", new LinkedList());
+    Handler animalHospital = new AnimalHospital(prompt, "환자");
+    Handler boardHandler = new BoardHandler(prompt, "게시글");
+    Handler readingHandler = new BoardHandler(prompt, "독서록");
 
     printTitle();
 
@@ -32,28 +28,27 @@ public class App {
       } else if (menuNo.equals("menu")) {
         printMenu();
       } else if (menuNo.equals("1")) {
-        memberHandler.execute();
+        animalHospital.execute();
       } else if (menuNo.equals("2")) {
         boardHandler.execute();
       } else if (menuNo.equals("3")) {
         readingHandler.execute();
       } else {
-        System.out.println("메뉴 번호가 옳지 않습니다!");
+        System.out.println("메뉴 번호가 옭지 않습니다.");
       }
     }
-
     prompt.close();
   }
 
   static void printMenu() {
-    System.out.println("1. 회원");
+    System.out.println("1. 환자");
     System.out.println("2. 게시글");
     System.out.println("3. 독서록");
     System.out.println("0. 종료");
   }
 
   static void printTitle() {
-    System.out.println("나의 목록 관리 시스템"); // <- 문자열 스트림 리터럴
-    System.out.println("----------------------------");
+    System.out.println("나의 동물병원/게시글/독서록 목록");
+    System.out.println("----------------------------------");
   }
 }

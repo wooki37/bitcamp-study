@@ -1,21 +1,20 @@
 package bitcamp.myapp_project.handler;
 
 import bitcamp.myapp.vo.Board;
-import bitcamp.util.List;
+import bitcamp.util.LinkedList_My;
 import bitcamp.util.Prompt;
 
 public class BoardHandler implements Handler {
 
 
-  private List list;
+  private LinkedList_My list = new LinkedList_My();
   private Prompt prompt;
 
   private String title;
 
-  public BoardHandler(Prompt prompt, String title, List list) {
+  public BoardHandler(Prompt prompt, String title) {
     this.prompt = prompt;
     this.title = title;
-    this.list = list;
   }
 
   public void execute() {
@@ -67,8 +66,9 @@ public class BoardHandler implements Handler {
     System.out.println("번호, 제목, 작성자, 조회수, 등록일");
     System.out.println("---------------------------------------");
 
-    for (int i = 0; i < this.list.size(); i++) {
-      Board board = (Board) this.list.get(i);
+    Object[] arr = this.list.getList();
+    for (Object obj : arr) {
+      Board board = (Board) obj;
       System.out.printf("%d, %s, %s, %d, %tY-%5$tm-%5$td\n", board.getNo(), board.getTitle(),
           board.getWriter(), board.getViewCount(), board.getCreatedDate());
     }
@@ -77,7 +77,7 @@ public class BoardHandler implements Handler {
   private void viewBoard() {
     int boardNo = this.prompt.inputInt("번호? ");
 
-    Board board = this.findBy(boardNo);
+    Board board = (Board) this.list.retrieve(new Board(boardNo));
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다!");
       return;
@@ -94,7 +94,7 @@ public class BoardHandler implements Handler {
   private void updateBoard() {
     int boardNo = this.prompt.inputInt("번호? ");
 
-    Board board = this.findBy(boardNo);
+    Board board = (Board) this.list.retrieve(new Board(boardNo));
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다!");
       return;
@@ -113,15 +113,5 @@ public class BoardHandler implements Handler {
     if (!this.list.remove(new Board(this.prompt.inputInt("번호? ")))) {
       System.out.println("해당 번호의 게시글이 없습니다!");
     }
-  }
-
-  private Board findBy(int no) {
-    for (int i = 0; i < this.list.size(); i++) {
-      Board b = (Board) this.list.get(i);
-      if (b.getNo() == no) {
-        return b;
-      }
-    }
-    return null;
   }
 }

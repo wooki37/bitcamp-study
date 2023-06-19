@@ -1,20 +1,19 @@
 package bitcamp.myapp_project.handler;
 
 import bitcamp.myapp_project.vo.Member;
-import bitcamp.util.List;
+import bitcamp.util.LinkedList_My;
 import bitcamp.util.Prompt;
 
 public class AnimalHospital implements Handler {
 
   // 범용으로 만들어진 ArrayList
-  private List list;
+  private LinkedList_My list = new LinkedList_My();
   private Prompt prompt;
   private String title;
 
-  public AnimalHospital(Prompt prompt, String title, List list) {
+  public AnimalHospital(Prompt prompt, String title) {
     this.prompt = prompt;
     this.title = title;
-    this.list = list;
   }
 
   // Handler 인터페이스에 선언된 대로 정의했다.
@@ -63,7 +62,6 @@ public class AnimalHospital implements Handler {
     m.setAddress(this.prompt.inputString("주소? "));
     m.setPhone(Integer.parseInt(this.prompt.inputString("연락처?(010) ")));
     m.setGender(inputGender((char) 0));
-
     this.list.add(m);
   }
 
@@ -96,8 +94,9 @@ public class AnimalHospital implements Handler {
     System.out.println("보호자ID/환자ID/  환자명/ 품종/ 나이/ 주소/ 연락처/ 성별");
     System.out.println("-----------------------------------------------------------------------");
 
-    for (int i = 0; i < this.list.size(); i++) {
-      Member m = (Member) this.list.get(i);
+    Object[] arr = this.list.getList();
+    for (Object obj : arr) {
+      Member m = (Member) obj;
       System.out.printf("%d/,    %d/,%s/,  %s/,  %d/, %s/,(010)%d/, %s\n", m.getNo(), m.getNo(),
           m.getName(), m.getBreeds(), m.getAge(), m.getAddress(), m.getPhone(),
           toGenderString(m.getGender()));
@@ -107,7 +106,7 @@ public class AnimalHospital implements Handler {
   private void viewMember() {
     int memberNo = this.prompt.inputInt("번호? ");
 
-    Member m = this.findBy(memberNo);
+    Member m = (Member) this.list.retrieve(new Member(memberNo));
     if (m == null) {
       System.out.println("해당 번호의 환자가 없습니다!");
       return;
@@ -129,7 +128,7 @@ public class AnimalHospital implements Handler {
   public void updateMember() {
     int memberNo = this.prompt.inputInt("보호자ID 번호? ");
 
-    Member m = this.findBy(memberNo);
+    Member m = (Member) this.list.retrieve(new Member(memberNo));
     if (m == null) {
       System.out.println("해당 번호의 ID가 없습니다.");
       return;
@@ -164,19 +163,9 @@ public class AnimalHospital implements Handler {
     }
   }
 
-  private void deleteMember() {
+  public void deleteMember() {
     if (!this.list.remove(new Member(this.prompt.inputInt("번호? ")))) {
       System.out.println("해당 번호가 존재하지 않습니다.");
     }
-  }
-
-  private Member findBy(int no) {
-    for (int i = 0; i < this.list.size(); i++) {
-      Member m = (Member) this.list.get(i);
-      if (m.getNo() == no) {
-        return m;
-      }
-    }
-    return null;
   }
 }

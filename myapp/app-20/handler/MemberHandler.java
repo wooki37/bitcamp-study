@@ -1,19 +1,18 @@
 package bitcamp.myapp_project.handler;
 
 import bitcamp.myapp.vo.Member;
-import bitcamp.util.List;
+import bitcamp.util.LinkedList_My;
 import bitcamp.util.Prompt;
 
 public class MemberHandler implements Handler {
 
-  private List list;
+  private LinkedList_My list = new LinkedList_My();
   private Prompt prompt;
   private String title;
 
-  public MemberHandler(Prompt prompt, String title, List list) {
+  public MemberHandler(Prompt prompt, String title) {
     this.prompt = prompt;
     this.title = title;
-    this.list = list;
   }
 
   public void execute() {
@@ -65,8 +64,9 @@ public class MemberHandler implements Handler {
     System.out.println("번호, 이름, 이메일, 성별");
     System.out.println("---------------------------------------");
 
-    for (int i = 0; i < this.list.size(); i++) {
-      Member m = (Member) this.list.get(i);
+    Object[] arr = this.list.getList();
+    for (Object obj : arr) {
+      Member m = (Member) obj;
       System.out.printf("%d, %s, %s, %s\n", m.getNo(), m.getName(), m.getEmail(),
           toGenderString(m.getGender()));
     }
@@ -75,7 +75,7 @@ public class MemberHandler implements Handler {
   private void viewMember() {
     int memberNo = this.prompt.inputInt("번호? ");
 
-    Member m = this.findBy(memberNo);
+    Member m = (Member) this.list.retrieve(new Member(memberNo));
     if (m == null) {
       System.out.println("해당 번호의 회원이 없습니다!");
       return;
@@ -93,7 +93,7 @@ public class MemberHandler implements Handler {
   private void updateMember() {
     int memberNo = this.prompt.inputInt("번호? ");
 
-    Member m = this.findBy(memberNo);
+    Member m = (Member) this.list.retrieve(new Member(memberNo));
     if (m == null) {
       System.out.println("해당 번호의 회원이 없습니다!");
       return;
@@ -132,15 +132,4 @@ public class MemberHandler implements Handler {
       System.out.println("해당 번호의 회원이 없습니다!");
     }
   }
-
-  private Member findBy(int no) {
-    for (int i = 0; i < this.list.size(); i++) {
-      Member m = (Member) this.list.get(i);
-      if (m.getNo() == no) {
-        return m;
-      }
-    }
-    return null;
-  }
-
 }

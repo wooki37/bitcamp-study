@@ -53,7 +53,7 @@ public class LinkedList implements List {
     Node node = new Node();
     node.value = value;
 
-    if (head == null) {
+    if (this.head == null) {
       head = node;
     } else if (this.tail != null) {
       this.tail.next = node;
@@ -82,9 +82,10 @@ public class LinkedList implements List {
     if (!isValid(index)) {
       return null;
     }
+
     Node cursor = this.head;
 
-    for (int i = 0; i <= index; i++) {
+    for (int i = 0; i < index; i++) {
       cursor = cursor.next;
     }
     return cursor.value;

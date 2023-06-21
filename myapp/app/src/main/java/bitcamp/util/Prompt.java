@@ -7,7 +7,7 @@ public class Prompt {
 
   private Scanner scanner;
 
-  // default constructor
+  // default constructor 정의
   public Prompt() {
     this.scanner = new Scanner(System.in);
   }

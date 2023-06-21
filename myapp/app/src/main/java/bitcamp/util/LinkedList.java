@@ -1,5 +1,6 @@
 package bitcamp.util;
 
+
 public class LinkedList implements List {
 
   Node head;
@@ -8,20 +9,20 @@ public class LinkedList implements List {
 
   public static void main(String[] args) {
     LinkedList list = new LinkedList();
-    list.add(Integer.valueOf(100)); // index : 0
-    list.add(Integer.valueOf(200)); // index : 1
-    list.add(Integer.valueOf(300)); // index : 2
-    list.add(Integer.valueOf(400)); // index : 3
-    list.add(Integer.valueOf(500)); // index : 4
+    list.add(Integer.valueOf(100)); // index: 0
+    list.add(Integer.valueOf(200)); // index: 1
+    list.add(Integer.valueOf(300)); // index: 2
+    list.add(Integer.valueOf(400)); // index: 3
+    list.add(Integer.valueOf(500)); // index: 4
 
     print(list);
 
-    // System.out.println(list.remove(Integer.valueOf(300)));
-    // System.out.println(list.remove(Integer.valueOf(300)));
-    // System.out.println(list.remove(Integer.valueOf(300)));
-    // System.out.println(list.remove(Integer.valueOf(300)));
-    // System.out.println(list.remove(Integer.valueOf(300)));
-    // System.out.println(list.remove(Integer.valueOf(300)));
+    //    System.out.println(list.remove(Integer.valueOf(300)));
+    //    System.out.println(list.remove(Integer.valueOf(500)));
+    //    System.out.println(list.remove(Integer.valueOf(100)));
+    //    System.out.println(list.remove(Integer.valueOf(200)));
+    //    System.out.println(list.remove(Integer.valueOf(400)));
+    //    System.out.println(list.remove(Integer.valueOf(600)));
 
     System.out.println(list.remove(2));
     System.out.println(list.remove(3));
@@ -31,12 +32,14 @@ public class LinkedList implements List {
 
     list.add(Integer.valueOf(1000));
     list.add(Integer.valueOf(2000));
+
     print(list);
 
-    // System.out.println(list.retrieve(100));
-    // System.out.println(list.retrieve(300));
-    // System.out.println(list.retrieve(500));
-    // System.out.println(list.retrieve(600));
+
+    //    System.out.println(list.retrieve(100));
+    //    System.out.println(list.retrieve(300));
+    //    System.out.println(list.retrieve(500));
+    //    System.out.println(list.retrieve(600));
   }
 
   static void print(LinkedList list) {
@@ -54,7 +57,7 @@ public class LinkedList implements List {
     node.value = value;
 
     if (this.head == null) {
-      head = node;
+      this.head = node;
     } else if (this.tail != null) {
       this.tail.next = node;
     }
@@ -88,6 +91,7 @@ public class LinkedList implements List {
     for (int i = 0; i < index; i++) {
       cursor = cursor.next;
     }
+
     return cursor.value;
   }
 
@@ -99,35 +103,25 @@ public class LinkedList implements List {
     while (cursor != null) {
       if (cursor.value.equals(value)) {
         if (prev == null) {
-          // 삭제할 노드가 시작 노드라면
-          head = cursor.next;
-
-          // 삭제할 노드가 끝 노드라면
-          if (head == null) {
-            tail = null;
+          this.head = cursor.next;
+          if (this.head == null) {
+            this.tail = null;
           }
         } else if (cursor.next == null) {
-          // 삭제할 노드가 끝 노드라면
-          tail = prev;
-          tail.next = null;
-        } else { // 중요부분!!
-          // 중간 노드라면, 다음 노드의 주소를 이전 노드에 저장한다.
+          this.tail = prev;
+          this.tail.next = null;
+        } else {
           prev.next = cursor.next;
         }
-        size--;
-
-        // 가비지 객체를 초기화시켜서 가비지가 인스턴스를 가리키지 않도록 한다.
-        cursor.next = null; // 가비지 컬렉터가 잘 처리하지만 수작업을 해야한다.
-        cursor.value = null; // 중요부분!!
-
+        this.size--;
+        cursor.next = null;
+        cursor.value = null;
         return true;
       }
-      // 현재 커서가 가리키는 노드를 prev 에 보관한다.
       prev = cursor;
-
-      // 현재커서를 다음 노드로 이동한다.
       cursor = cursor.next;
     }
+
     return false;
   }
 
@@ -136,6 +130,7 @@ public class LinkedList implements List {
     if (!isValid(index)) {
       return null;
     }
+
     // 삭제하려는 값이 있는 노드까지 이동한다.
     Node prev = null;
     Node cursor = this.head;
@@ -143,27 +138,25 @@ public class LinkedList implements List {
     for (int i = 0; i < index; i++) {
       prev = cursor; // 다음 노드로 이동하기 전에 현재 커서가 가리키는 노드를 prev에 보관한다.
       cursor = cursor.next; // 커서를 다음 노드로 이동시킨다.
-    } // 삭제할 값을 리턴할 수 있도록 보관한다.
+    }
+
+    // 삭제할 값을 리턴할 수 있도록 보관한다.
     Object old = cursor.value;
+
     if (prev == null) {
-      // 삭제할 노드가 시작 노드라면
-      head = cursor.next;
-      // 삭제할 노드가 끝 노드라면
-      if (head == null) {
-        tail = null;
+      this.head = cursor.next;
+      if (this.head == null) {
+        this.tail = null;
       }
     } else if (cursor.next == null) {
-      // 삭제할 노드가 끝 노드라면
-      tail = prev;
-      tail.next = null;
-    } else { // 중요부분!!
-      // 중간 노드라면, 다음 노드의 주소를 이전 노드에 저장한다.
+      this.tail = prev;
+      this.tail.next = null;
+    } else {
       prev.next = cursor.next; // 현재 커서의 다음 노드를 현재 커서의 이전 노드와 연결한다.
     }
-    size--;
-    // 가비지 객체를 초기화시켜서 가비지가 인스턴스를 가리키지 않도록 한다.
-    cursor.next = null; // 가비지 컬렉터가 잘 처리하지만 수작업을 해야한다.
-    cursor.value = null; // 중요부분!!
+    this.size--;
+    cursor.next = null;
+    cursor.value = null;
 
     return old;
   }
@@ -178,8 +171,8 @@ public class LinkedList implements List {
   }
 
   static class Node {
-
     Object value;
     Node next;
   }
+
 }

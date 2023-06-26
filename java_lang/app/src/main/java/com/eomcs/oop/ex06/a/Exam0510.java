@@ -10,7 +10,7 @@ public class Exam0510 {
     // => 레퍼런스에 들어있는 주소가 특정 클래스의 인스턴스인지 검사한다.
     // => 또는 그 상위/하위 클래스의 인스턴스인지 검사한다.
     //
-    System.out.println(v instanceof Sedan);
+    System.out.println(v instanceof Sedan); // Sedan 기능을 포함하고 있다. 인지 검사
     System.out.println(v instanceof Car);
     System.out.println(v instanceof Vehicle);
     System.out.println(v instanceof Object);
@@ -20,7 +20,3 @@ public class Exam0510 {
   }
 
 }
-
-
-
-

@@ -1,12 +1,12 @@
 package bitcamp.myapp.handler;
 
+import java.util.List;
 import bitcamp.myapp.vo.Member;
 import bitcamp.util.BreadcrumbPrompt;
-import bitcamp.util.List;
 
 public class MemberDetailListener extends AbstractMemberListener {
 
-  public MemberDetailListener(List list) {
+  public MemberDetailListener(List<Member> list) {
     super(list);
   }
 

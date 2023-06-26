@@ -1,39 +1,43 @@
 package bitcamp.util;
 
-public class Stack extends LinkedList {
+public class Stack<E> extends LinkedList<E> {
 
   public static void main(String[] args) {
-    Stack s = new Stack();
+    Stack<String> s = new Stack<>();
     s.push("홍길동");
     s.push("임꺽정");
     s.push("유관순");
     s.push("안중근");
     s.push("윤봉길");
 
-    System.out.println(s.pop());
-    System.out.println(s.pop());
-    System.out.println(s.pop());
-    System.out.println(s.pop());
-    System.out.println(s.pop());
+    Iterator<String> iterator = s.iterator();
+    while (iterator.hasNext()) {
+      System.out.println(iterator.next());
+    }
 
+    System.out.println(s.pop());
+    System.out.println(s.pop());
+    System.out.println(s.pop());
+    System.out.println(s.pop());
+    System.out.println(s.pop());
     System.out.println(s.pop());
   }
 
-  public void push(Object value) {
+  public void push(E value) {
     // 목록 맨 끝에 추가한다.
     // 따로 만들 필요가 없다.
     // 수퍼 클래스에 있는 메서드를 이용하여 기능을 구현한다.
     this.add(value); // 상속 받은 메서드 = 서브 클래스에서 사용할 수 있는 수퍼 클래스의 메서드
   }
 
-  public Object pop() {
+  public E pop() {
     if (this.empty()) {
       return null;
     }
     return this.remove(this.size() - 1);
   }
 
-  public Object peek() {
+  public E peek() {
     if (this.empty()) {
       return null;
     }
@@ -43,14 +47,21 @@ public class Stack extends LinkedList {
   public boolean empty() {
     return this.size() == 0;
   }
+
+  @Override
+  public Iterator<E> iterator() {
+    return new Iterator<>() { // 인터페이스를 구현 Iterator class에 따라서 익명 클래스를 바로 만들어서 호출 생성자
+      @Override
+      public boolean hasNext() {
+        return !Stack.this.empty();
+      }
+
+      @Override
+      public E next() {
+        return Stack.this.pop();
+      }
+    };
+  }
 }
-
-
-
-
-
-
-
-
 
 

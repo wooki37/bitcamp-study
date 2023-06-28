@@ -1,5 +1,7 @@
 package bitcamp.util;
 
+import java.util.List;
+
 public class HospitalList implements List {
 
   private static final int DEFAULT_SIZE = 3;

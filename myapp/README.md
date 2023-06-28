@@ -176,3 +176,14 @@
 ## 26. 자바 Collection API 사용하기
 
 - 목록을 다루는 기존 클래스를 자바 컬렉션 API 로 교체
+
+## 27. File I/O API를 이용하여 데이터를 바이너리 형식으로 입출력하기
+
+- FileInputStream/FileOutputStream 사용법
+- 바이너리 형식으로 데이터를 입출력하는 방법
+
+## 28. 상속을 이용하여 primitive type과 String 출력 기능을 추가하기
+
+- 상속을 이용하여 바이트 입출력 
+  - DataInputStream = FileInputStream 클래스 + primitive type/ String 값 읽기
+  - DataOutputStream = FileOutputStream 클래스 + primitive type/ String 값 쓰기

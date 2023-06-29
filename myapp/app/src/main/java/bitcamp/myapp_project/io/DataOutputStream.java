@@ -1,13 +1,23 @@
 package bitcamp.myapp_project.io;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.io.IOException;
 
-public class DataOutputStream extends FileOutputStream {
+public class DataOutputStream extends OutputStream {
+  OutputStream original;
 
-  public DataOutputStream(String name) throws FileNotFoundException {
-    super(name);
+  public DataOutputStream(OutputStream original) {
+    this.original = original;
+  }
+
+  @Override
+  public void write(int b) throws IOException {
+    original.write(b);
+  }
+
+  @Override
+  public void flush() throws IOException {
+    original.flush();
   }
 
   public void writeShort(int v) throws IOException {
@@ -39,6 +49,12 @@ public class DataOutputStream extends FileOutputStream {
   }
 
   public void writeUTF(String str) throws IOException {
+    if (str == null) {
+      // null인 경우 처리 방식 선택
+      // 예외 던지기, 기본값 할당 등
+      str = ""; // 또는 다른 기본값으로 설정
+    }
+
     byte[] bytes = str.getBytes("UTF-8");
     this.write(bytes.length >> 8);
     this.write(bytes.length);

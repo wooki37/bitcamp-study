@@ -29,7 +29,7 @@ public class BufferedFileOutputStream extends FileOutputStream {
   // 버퍼에 잔여 데이터가 남아 있을 수 있다.
   // 버퍼의 잔여 데이터를 강제로 출력하도록 상속 받은 다음 메서드를 재정의 한다.
   @Override
-  public void flush() throws IOException {
+  public void flush() throws IOException { // flush : 버퍼에 잔여가 남아 있으면 남은 개수만큼 file로 출력한다.
     if (cursor > 0) {
       this.write(buf, 0, cursor);
       cursor = 0;

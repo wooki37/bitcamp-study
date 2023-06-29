@@ -1,5 +1,11 @@
 package bitcamp.myapp_project;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import bitcamp.myapp.handler.BoardAddListener;
 import bitcamp.myapp.handler.BoardDeleteListener;
 import bitcamp.myapp.handler.BoardDetailListener;
@@ -14,15 +20,14 @@ import bitcamp.myapp_project.handler.AnimalHospitalDeleteListener;
 import bitcamp.myapp_project.handler.AnimalHospitalDetailListener;
 import bitcamp.myapp_project.handler.AnimalHospitalListListener;
 import bitcamp.myapp_project.handler.AnimalHospitalUpdateListener;
+import bitcamp.myapp_project.io.BufferedInputStream;
+import bitcamp.myapp_project.io.BufferedOutputStream;
 import bitcamp.myapp_project.io.DataInputStream;
 import bitcamp.myapp_project.io.DataOutputStream;
 import bitcamp.myapp_project.vo.Member;
 import bitcamp.util.BreadcrumbPrompt;
 import bitcamp.util.Menu;
 import bitcamp.util.MenuGroup;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 public class App {
 
@@ -35,6 +40,8 @@ public class App {
   MenuGroup mainMenu = new MenuGroup("메인");
 
   public App() {
+    File file = new File("patient.data");
+    System.out.println(file.getAbsolutePath());
     prepareMenu();
   }
 
@@ -58,13 +65,13 @@ public class App {
   }
 
   private void loadData() {
-    loadMember("member.data", hospitalList);
+    loadMember();
     loadBoard("borad.data", boardList);
     loadBoard("reading.data", readingList);
   }
 
   private void saveData() {
-    saveMember("member.data", hospitalList);
+    saveMember();
     saveBoard("borad.data", boardList);
     saveBoard("reading.data", readingList);
   }
@@ -102,9 +109,12 @@ public class App {
 
   }
 
-  private void loadMember(String filename, List<Member> list) {
+  private void loadMember() {
     try {
-      DataInputStream in = new DataInputStream(filename);
+      FileInputStream in0 = new FileInputStream(
+          "/Users/joohyunwook/Desktop/git/bitcamp-study/myapp/app/src/main/java/bitcamp/myapp_project/patient.data");
+      BufferedInputStream in1 = new BufferedInputStream(in0); // Decoratro 역할 수행
+      DataInputStream in = new DataInputStream(in1); // Decoratro 역할 수행
       int size = in.readShort();
 
       for (int i = 0; i < size; i++) {
@@ -120,17 +130,21 @@ public class App {
         member.setPassword(in.readUTF());
         hospitalList.add(member);
       }
-      Member.userId = hospitalList.get(hospitalList.size() - 1).getNo() + 1;
+      if (hospitalList.size() > 0) {
+        Member.userId = hospitalList.get(hospitalList.size() - 1).getNo() + 1;
+      }
       in.close();
     } catch (Exception e) {
-      System.out.println("회원 정보를 읽는 중 오류 발생!");
+      System.out.println("환자 정보를 읽는 중 오류 발생!");
       e.printStackTrace();
     }
   }
 
   private void loadBoard(String filename, List<Board> list) {
     try {
-      DataInputStream in = new DataInputStream(filename);
+      FileInputStream in0 = new FileInputStream(filename);
+      BufferedInputStream in1 = new BufferedInputStream(in0); // Decoratro 역할 수행
+      DataInputStream in = new DataInputStream(in1); // Decoratro 역할 수행
       int size = in.readShort();
 
       for (int i = 0; i < size; i++) {
@@ -144,21 +158,33 @@ public class App {
         board.setCreatedDate(in.readLong());
         list.add(board);
       }
-      Board.boardNo = Math.max(Board.boardNo, list.get(list.size() - 1).getNo() + 1);
-
+      if (boardList.size() > 0) {
+        Board.boardNo = Math.max(Board.boardNo, list.get(list.size() - 1).getNo() + 1);
+      }
       in.close();
     } catch (Exception e) {
       System.out.println(filename + "파일을 읽는 중 오류 발생!");
     }
   }
 
-  private void saveMember(String filename, List<Member> list) {
+  private void saveMember() {
     try {
-      DataOutputStream out = new DataOutputStream(filename);
+      FileOutputStream out0 = new FileOutputStream(
+          "patient.data");
+      BufferedOutputStream out1 = new BufferedOutputStream(out0); // Decoratro 역할 수행
+      DataOutputStream out = new DataOutputStream(out1); // Decoratro 역할 수행
 
       out.writeShort(hospitalList.size());
 
       for (Member member : hospitalList) {
+        // System.out.println("멤버번호 : " + member.getNo());
+        // System.out.println("멤버이름 : " + member.getName());
+        // System.out.println("멤버이름 : " + member.getBreeds());
+        // System.out.println("멤버이름 : " + member.getAge());
+        // System.out.println("멤버이름 : " + member.getAddress());
+        // System.out.println("멤버이름 : " + member.getGender());
+        // System.out.println("멤버이메일 : " + member.getEmail());
+        // System.out.println("멤버이메일 : " + member.getPassword());
         out.writeInt(member.getNo());
         out.writeUTF(member.getName());
         out.writeUTF(member.getBreeds());
@@ -166,8 +192,6 @@ public class App {
         out.writeUTF(member.getAddress());
         out.writeInt(member.getPhone());
         out.writeChar(member.getGender());
-        out.writeUTF(member.getEmail());
-        out.writeUTF(member.getPassword());
       }
       out.close();
     } catch (Exception e) {
@@ -178,7 +202,9 @@ public class App {
 
   private void saveBoard(String filename, List<Board> list) {
     try {
-      DataOutputStream out = new DataOutputStream(filename);
+      FileOutputStream out0 = new FileOutputStream(filename);
+      BufferedOutputStream out1 = new BufferedOutputStream(out0); // Decoratro 역할 수행
+      DataOutputStream out = new DataOutputStream(out1); // Decoratro 역할 수행
 
       out.writeShort(list.size());
 

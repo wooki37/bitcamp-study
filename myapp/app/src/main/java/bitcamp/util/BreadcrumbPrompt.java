@@ -6,7 +6,7 @@ public class BreadcrumbPrompt extends Prompt {
 
   private Stack<String> breadcrumbs = new Stack<>();
 
-  public void appendBreadcrumb(String title) {
+  public void appendBreadcrumb(String title, String menu) {
     this.breadcrumbs.push(title);
   }
 

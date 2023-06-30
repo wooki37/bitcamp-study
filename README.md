@@ -278,7 +278,6 @@
   - 27. File I/O API를 이용하여 데이터를 바이너리 형식으로 입출력하기
   - 28. 상속을 이용하여 primitive type과 String 출력 기능을 추가하기
 
-
 ### 27일(6/29, 목)
 
 - 자바 프로그래밍(com.eomcs.io)
@@ -290,10 +289,17 @@
   - 포함 관계를 이용한 입출력 기능 확장(ex08)(자습)
   - 데코레이터 패턴을 이용한 입출력 기능 확장(ex09)(자습)
   - Java Stream API 사용법(ex10)(자습)
-프로젝트 실습
+- 프로젝트 실습
   - 입출력 성능을 높이기 위해 버퍼 기능 추가하기
   - 입출력 기능 확장에 상속 대신 Decorator 패턴을 적용하기
   - Java Stream API 로 교체하기
+
+### 28일(6/30,금)
+
+- 프로젝트 실습
+  - 인스턴스를 통째로 입출력하기(객체 직렬화)
+  - character stream API를 사용하여 CSV 텍스트 형식으로 입출력하기
+  - 리팩토링: Factory Method 패턴(GoF), Information Expert 패턴(GRASP)
 
   ### 웨일즈 화상회의
   https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a

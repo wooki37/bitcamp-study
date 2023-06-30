@@ -1,6 +1,7 @@
 package bitcamp.myapp_project.vo;
 
 public class Board {
+
   public static int boardNo = 1;
 
   private int no;
@@ -24,13 +25,17 @@ public class Board {
     if (obj == null) {
       return false;
     }
+
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    Board board = (Board) obj;
-    if (this.getNo() != board.getNo()) {
+
+    Board b = (Board) obj;
+
+    if (this.getNo() != b.getNo()) {
       return false;
     }
+
     return true;
   }
 
@@ -89,5 +94,6 @@ public class Board {
   public void setPassword(String password) {
     this.password = password;
   }
+
 
 }

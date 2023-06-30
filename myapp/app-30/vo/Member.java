@@ -51,6 +51,7 @@ public class Member {
     // 파라미터 obj가 가리키는 인스턴스의 클래스가 같다고 결론이 났기 때문에
     // 다음과 같이 obj를 Member 타입으로 형변환한다.
     Member m = (Member) obj;
+
     if (this.getNo() != m.getNo()) {
       return false;
     }

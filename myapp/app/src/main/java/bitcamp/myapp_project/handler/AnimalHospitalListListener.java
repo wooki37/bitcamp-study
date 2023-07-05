@@ -18,8 +18,9 @@ public class AnimalHospitalListListener extends AbstractAnimalHospitalListener {
 
     for (int i = 0; i < this.list.size(); i++) {
       Patient m = this.list.get(i);
-      System.out.printf("%d,%d,%s,%s,%d,%s,(010)%d,%s\n", m.getNo(), m.getNo(), m.getName(),
-          m.getBreeds(), m.getAge(), m.getAddress(), m.getPhone(), toGenderString(m.getGender()));
+      System.out.printf("%d,%d,%s,%s,%d,%s,(010)%d,%s\n", m.getPatientNo(), m.getParentNo(),
+          m.getName(), m.getBreeds(), m.getAge(), m.getAddress(), m.getPhone(),
+          toGenderString(m.getGender()));
     }
   }
 }

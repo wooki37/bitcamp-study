@@ -21,7 +21,7 @@ public abstract class AbstractAnimalHospitalListener implements ActionListener {
   protected Patient findBy(int no) {
     for (int i = 0; i < this.list.size(); i++) {
       Patient p = this.list.get(i);
-      if (p.getNo() == no) {
+      if (p.getPatientNo() == no) {
         return p;
       }
     }

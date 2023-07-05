@@ -1,4 +1,4 @@
-// 추상 클래스와 추상 메서드의 활용
+// 추상 클래스와 추상 메서드의 활용 : Templete Method (GoF)의 패턴
 package com.eomcs.oop.ex07.a;
 
 abstract class Letter {

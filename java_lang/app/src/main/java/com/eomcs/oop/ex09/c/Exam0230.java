@@ -48,10 +48,3 @@ public class Exam0230 {
   public static void main(String[] args) {
   }
 }
-
-
-
-
-
-
-

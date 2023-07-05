@@ -12,7 +12,8 @@ public class Patient implements Serializable, CsvObject, AutoIncrement {
   public static final char MALE = 'M';
   public static final char FEMALE = 'W';
 
-  private int no;
+  private int patientNo;
+  private int parentNo;
   private String name;
   private String breeds;
   private int age;
@@ -22,15 +23,15 @@ public class Patient implements Serializable, CsvObject, AutoIncrement {
 
   public Patient() {}
 
-  public Patient(int no) {
-    this.no = no;
+  public Patient(int patientNo) {
+    this.patientNo = patientNo;
   }
 
   public static Patient fromCsv(String csv) {
     String[] values = csv.split(",");
 
     Patient patient = new Patient(Integer.parseInt(values[0]));
-    patient.setNo(Integer.parseInt(values[1]));
+    patient.setParentNo(Integer.parseInt(values[1]));
     patient.setName(values[2]);
     patient.setBreeds(values[3]);
     patient.setAge(Integer.parseInt(values[4]));
@@ -38,22 +39,23 @@ public class Patient implements Serializable, CsvObject, AutoIncrement {
     patient.setPhone(Integer.parseInt(values[6]));
     patient.setGender(values[7].charAt(0));
 
-    if (Patient.userId <= patient.getNo()) {
-      Patient.userId = patient.getNo() + 1;
+    if (Patient.userId <= patient.getPatientNo()) {
+      Patient.userId = patient.getPatientNo() + 1;
     }
     return patient;
   }
 
   @Override
   public String toCsvString() {
-    return String.format("%d,%d,%s,%s,%d,%s,%d,%c", this.getNo(), this.getNo(), this.getName(),
-        this.getBreeds(), this.getAge(), this.getAddress(), this.getPhone(), this.getGender());
+    return String.format("%d,%d,%s,%s,%d,%s,%d,%c", this.getPatientNo(), this.getParentNo(),
+        this.getName(), this.getBreeds(), this.getAge(), this.getAddress(), this.getPhone(),
+        this.getGender());
   }
 
   @Override
   public void updateKey() {
-    if (Patient.userId <= this.no) {
-      Patient.userId = this.no + 1;
+    if (Patient.userId <= this.patientNo) {
+      Patient.userId = this.patientNo + 1;
     }
   }
 
@@ -68,19 +70,27 @@ public class Patient implements Serializable, CsvObject, AutoIncrement {
 
     Patient p = (Patient) obj;
 
-    if (this.getNo() != p.getNo()) {
+    if (this.getPatientNo() != p.getPatientNo()) {
       return false;
     }
 
     return true;
   }
 
-  public int getNo() {
-    return no;
+  public int getPatientNo() {
+    return patientNo;
   }
 
-  public void setNo(int no) {
-    this.no = no;
+  public void setPatinetNo(int patientNo) {
+    this.patientNo = patientNo;
+  }
+
+  public int getParentNo() {
+    return parentNo;
+  }
+
+  public void setParentNo(int parentNo) {
+    this.parentNo = parentNo;
   }
 
   public String getName() {

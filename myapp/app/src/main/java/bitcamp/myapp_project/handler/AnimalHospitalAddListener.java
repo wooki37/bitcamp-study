@@ -13,8 +13,8 @@ public class AnimalHospitalAddListener extends AbstractAnimalHospitalListener {
   @Override
   public void service(BreadcrumbPrompt prompt) {
     Patient p = new Patient();
-    p.setNo(Patient.userId++);
-    p.setNo(Integer.parseInt(prompt.inputString("보호자ID? ")));
+    p.setPatinetNo(Patient.userId++);
+    p.setParentNo(Integer.parseInt(prompt.inputString("보호자ID? ")));
     p.setName(prompt.inputString("환자명? "));
     p.setBreeds(getMemberBreed(prompt));
     p.setAge(Integer.parseInt(prompt.inputString("나이? ")));

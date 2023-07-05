@@ -60,17 +60,17 @@ public class AnimalHospital implements Handler {
   }
 
   private void inputMember() {
-    Patient m = new Patient();
-    m.setNo(Integer.parseInt(this.prompt.inputString("보호자ID? ")));
-    m.setNo(Integer.parseInt(this.prompt.inputString("환자ID? ")));
-    m.setName(this.prompt.inputString("환자명? "));
-    m.setBreeds(getMemberBreed());
-    m.setAge(Integer.parseInt(this.prompt.inputString("나이? ")));
-    m.setAddress(this.prompt.inputString("주소? "));
-    m.setPhone(Integer.parseInt(this.prompt.inputString("연락처?(010) ")));
-    m.setGender(inputGender((char) 0));
+    Patient p = new Patient();
+    p.setPatinetNo(Integer.parseInt(this.prompt.inputString("환자ID? ")));
+    p.setParentNo(Integer.parseInt(this.prompt.inputString("보호자ID? ")));
+    p.setName(this.prompt.inputString("환자명? "));
+    p.setBreeds(getMemberBreed());
+    p.setAge(Integer.parseInt(this.prompt.inputString("나이? ")));
+    p.setAddress(this.prompt.inputString("주소? "));
+    p.setPhone(Integer.parseInt(this.prompt.inputString("연락처?(010) ")));
+    p.setGender(inputGender((char) 0));
 
-    this.list.add(m);
+    this.list.add(p);
   }
 
   private String getMemberBreed() {
@@ -99,32 +99,33 @@ public class AnimalHospital implements Handler {
 
   private void printMembers() {
     System.out.println("-----------------------------------------------------------------------");
-    System.out.println("보호자ID/환자ID/환자명/품종/나이/주소/연락처/성별");
+    System.out.println("환자ID/보호자ID/환자명/품종/나이/주소/연락처/성별");
     System.out.println("-----------------------------------------------------------------------");
 
     for (int i = 0; i < this.list.size(); i++) {
-      Patient m = (Patient) this.list.get(i);
-      System.out.printf("%d,%d,%s,%s,%d,%s,(010)%d,%s", m.getNo(), m.getNo(), m.getName(),
-          m.getBreeds(), m.getAge(), m.getAddress(), m.getPhone(), toGenderString(m.getGender()));
+      Patient p = (Patient) this.list.get(i);
+      System.out.printf("%d,%d,%s,%s,%d,%s,(010)%d,%s", p.getPatientNo(), p.getParentNo(),
+          p.getName(), p.getBreeds(), p.getAge(), p.getAddress(), p.getPhone(),
+          toGenderString(p.getGender()));
     }
   }
 
   private void viewMember() {
     int memberNo = this.prompt.inputInt("번호? ");
 
-    Patient m = this.findBy(memberNo);
-    if (m == null) {
+    Patient p = this.findBy(memberNo);
+    if (p == null) {
       System.out.println("해당 번호의 환자가 없습니다!");
       return;
     }
-    System.out.printf("보호자ID: %d\n", m.getNo());
-    System.out.printf("환자ID: %d\n", m.getNo());
-    System.out.printf("환자명: %s\n", m.getName());
-    System.out.printf("품종: %s\n", m.getBreeds());
-    System.out.printf("나이: %d\n", m.getAge());
-    System.out.printf("주소: %s\n", m.getAddress());
-    System.out.printf("연락처: %d\n", m.getPhone());
-    System.out.printf("성별: %s\n", toGenderString(m.getGender()));
+    System.out.printf("환자ID: %d\n", p.getPatientNo());
+    System.out.printf("보호자ID: %d\n", p.getParentNo());
+    System.out.printf("환자명: %s\n", p.getName());
+    System.out.printf("품종: %s\n", p.getBreeds());
+    System.out.printf("나이: %d\n", p.getAge());
+    System.out.printf("주소: %s\n", p.getAddress());
+    System.out.printf("연락처: %d\n", p.getPhone());
+    System.out.printf("성별: %s\n", toGenderString(p.getGender()));
   }
 
   private static String toGenderString(char gender) {
@@ -132,20 +133,20 @@ public class AnimalHospital implements Handler {
   }
 
   private void updateMember() {
-    int memberNo = this.prompt.inputInt("보호자ID 번호? ");
+    int patientNo = this.prompt.inputInt("환자ID 번호? ");
 
-    Patient m = this.findBy(memberNo);
-    if (m == null) {
+    Patient p = this.findBy(patientNo);
+    if (p == null) {
       System.out.println("해당 번호의 ID가 없습니다.");
       return;
     }
-    m.setNo(this.prompt.inputInt("환자ID(%d)? ", m.getNo()));
-    m.setName(this.prompt.inputString("환자명(%s)? ", m.getName()));
-    m.setBreeds(this.prompt.inputString("품종(%s)? ", m.getBreeds()));
-    m.setAge(this.prompt.inputInt("나이(%d)? ", m.getAge()));
-    m.setAddress(this.prompt.inputString("주소(%s)? ", m.getAddress()));
-    m.setPhone(this.prompt.inputInt("연락처(%d)? ", m.getPhone()));
-    m.setGender(inputGender(m.getGender()));
+    p.setParentNo(this.prompt.inputInt("보호자ID(%d)? ", p.getParentNo()));
+    p.setName(this.prompt.inputString("환자명(%s)? ", p.getName()));
+    p.setBreeds(this.prompt.inputString("품종(%s)? ", p.getBreeds()));
+    p.setAge(this.prompt.inputInt("나이(%d)? ", p.getAge()));
+    p.setAddress(this.prompt.inputString("주소(%s)? ", p.getAddress()));
+    p.setPhone(this.prompt.inputInt("연락처(%d)? ", p.getPhone()));
+    p.setGender(inputGender(p.getGender()));
   }
 
   private char inputGender(char gender) {
@@ -177,9 +178,9 @@ public class AnimalHospital implements Handler {
 
   private Patient findBy(int no) {
     for (int i = 0; i < this.list.size(); i++) {
-      Patient m = (Patient) this.list.get(i);
-      if (m.getNo() == no) {
-        return m;
+      Patient p = (Patient) this.list.get(i);
+      if (p.getPatientNo() == no) {
+        return p;
       }
     }
     return null;

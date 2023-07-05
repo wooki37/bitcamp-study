@@ -12,15 +12,15 @@ public class AnimalHospitalUpdateListener extends AbstractAnimalHospitalListener
 
   @Override
   public void service(BreadcrumbPrompt prompt) {
-    int memberNo = prompt.inputInt("환자ID 번호? ");
+    int patientNo = prompt.inputInt("환자ID 번호? ");
 
-    Patient p = this.findBy(memberNo);
+    Patient p = this.findBy(patientNo);
     if (p == null) {
       System.out.println("해당 번호의 ID가 없습니다.");
       return;
     }
 
-    p.setNo(prompt.inputInt("보호자ID(%d)? ", p.getNo()));
+    p.setParentNo(prompt.inputInt("보호자ID(%d)? ", p.getParentNo()));
     p.setName(prompt.inputString("환자명(%s)? ", p.getName()));
     p.setBreeds(prompt.inputString("품종(%s)? ", p.getBreeds()));
     p.setAge(prompt.inputInt("나이(%d)? ", p.getAge()));

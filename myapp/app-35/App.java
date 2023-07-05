@@ -106,7 +106,6 @@ public class App {
     helloMenu.addActionListener(new HelloListener());
     helloMenu.addActionListener(new FooterListener());
     mainMenu.add(helloMenu);
-
   }
 
   private <T> void loadJson(String filename, List<T> list, Class<T> clazz) {

@@ -1,0 +1,12 @@
+[
+  {
+    "patientNo": 2,
+    "parentNo": 11,
+    "name": "er",
+    "breeds": "고양이",
+    "age": 12,
+    "address": "er",
+    "phone": 3333333,
+    "gender": "M"
+  }
+]

@@ -1,20 +1,23 @@
 package bitcamp.myapp_project.handler;
 
-import java.util.List;
+import bitcamp.myapp_project.dao.PatientDao;
 import bitcamp.myapp_project.vo.Patient;
+import bitcamp.util.ActionListener;
 import bitcamp.util.BreadcrumbPrompt;
 
-public class AnimalHospitalDetailListener extends AbstractAnimalHospitalListener {
+public class AnimalHospitalDetailListener implements ActionListener {
 
-  public AnimalHospitalDetailListener(List<Patient> list) {
-    super(list);
+  PatientDao patientDao;
+
+  public AnimalHospitalDetailListener(PatientDao patientDao) {
+    this.patientDao = patientDao;
   }
 
   @Override
   public void service(BreadcrumbPrompt prompt) {
-    int memberNo = prompt.inputInt("번호? ");
+    int patientNo = prompt.inputInt("번호? ");
 
-    Patient p = this.findBy(memberNo);
+    Patient p = patientDao.findBy(patientNo);
     if (p == null) {
       System.out.println("해당 번호의 환자가 없습니다!");
       return;
@@ -26,6 +29,6 @@ public class AnimalHospitalDetailListener extends AbstractAnimalHospitalListener
     System.out.printf("나이: %d\n", p.getAge());
     System.out.printf("주소: %s\n", p.getAddress());
     System.out.printf("연락처: %d\n", p.getPhone());
-    System.out.printf("성별: %s\n", toGenderString(p.getGender()));
+    System.out.printf("성별: %s\n", p.getGender() == 'M' ? "수컷" : "암컷");
   }
 }

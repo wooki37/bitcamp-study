@@ -340,6 +340,23 @@
 - 프로젝트 실습
   - DAO 프록시 객체를 자동 생성하기
 
+### 34일(7/10,월)
+
+- 자바 프로그래밍(com.eomcs.exception)
+  - 예외 처리 문법을 사용하는 방법
+- 프로젝트 실습
+  - Reflection API를 활용하여 DAO 메서드 호출을 자동화하기
+
+### 35일(7/11,화)
+
+- 자바 프로그래밍
+  - 네트워킹 프로그래밍(com.eomcs.net)
+  - character stream API 사용법(com.eomcs.io.ex3)
+- 프로젝트 실습
+  - 예외 처리하기
+  - 여러 클라이언트의 요청을 순차적으로 처리하기: Stateful 방식
+  - 여러 클라이언트의 요청을 순차적으로 처리하기: Stateless 방식
+
   ### 웨일즈 화상회의
   https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   

@@ -1,0 +1,32 @@
+[
+  {
+    "patientNo": 1,
+    "parentNo": 2,
+    "name": "r",
+    "breeds": "강아지",
+    "age": 4,
+    "address": "r",
+    "phone": 554,
+    "gender": "M"
+  },
+  {
+    "patientNo": 2,
+    "parentNo": 3,
+    "name": "tt",
+    "breeds": "고양이",
+    "age": 4,
+    "address": "t",
+    "phone": 55555555,
+    "gender": "M"
+  },
+  {
+    "patientNo": 3,
+    "parentNo": 6,
+    "name": "tt",
+    "breeds": "거북이",
+    "age": 2,
+    "address": "ㄱㄱ",
+    "phone": 4444444,
+    "gender": "W"
+  }
+]

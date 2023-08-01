@@ -46,6 +46,8 @@ public class ClientApp {
         }
         System.out.print(response);
       }
+
+
     } catch (Exception e) {
       System.out.println("서버 통신 오류!");
       e.printStackTrace();

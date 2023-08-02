@@ -6,7 +6,7 @@ import bitcamp.myapp_project.vo.Patient;
 public interface PatientDao {
   void insert(Patient patient);
 
-  List<Patient> findAll(int category);
+  List<Patient> findAll();
 
   Patient findBy(int no);
 

@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'eclipse'
+    id 'eclipse-wtp'
     id 'war'
 }
 
@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
 
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -51,8 +52,20 @@ eclipse {
         targetCompatibility = 17
         javaRuntimeName = "JavaSE-17"
     }
+        wtp {
+        facet {
+  
+            facet name: 'jst.java', version: '17'
+           // facet name: 'jst.web', version: '4.0'
+        }
+        component {
+            contextPath = '/'
+            //deployName = 'web'
+        }
+    }
+  }
     
     war {
     archiveBaseName = "servlet-app"
-}
+
 }

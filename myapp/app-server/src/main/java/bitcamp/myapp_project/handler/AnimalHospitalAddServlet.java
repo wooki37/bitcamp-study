@@ -15,14 +15,21 @@ public class AnimalHospitalAddServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     Patient p = new Patient();
-
     p.setParentNo(Integer.parseInt(request.getParameter("parentNo")));
     p.setName(request.getParameter("name"));
-    p.setBreeds(request.getParameter("breeds"));
+
+    // 직접입력인 경우에는 breeds_custom 값을 사용
+    String selectedBreeds = request.getParameter("breeds");
+    if ("직접입력".equals(selectedBreeds)) {
+      p.setBreeds(request.getParameter("breeds_custom"));
+    } else {
+      p.setBreeds(selectedBreeds);
+    }
+
     p.setAge(Integer.parseInt(request.getParameter("age")));
     p.setAddress(request.getParameter("address"));
     p.setPhone(request.getParameter("phone"));
@@ -35,7 +42,7 @@ public class AnimalHospitalAddServlet extends HttpServlet {
     out.println("<head>");
     out.println("<meta charset='UTF-8'>");
     out.println("<meta http-equiv='refresh' content='1;url=/patient/list'>");
-    out.println("<title>환자</title>");
+    out.println("<title>환자 등록</title>");
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>환자 등록</h1>");
@@ -54,4 +61,3 @@ public class AnimalHospitalAddServlet extends HttpServlet {
     out.println("</html>");
   }
 }
-

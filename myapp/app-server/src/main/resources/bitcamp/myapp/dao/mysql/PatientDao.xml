@@ -28,7 +28,10 @@
       parent_no,
       name,
       breeds,
-      age
+      age,
+      address,
+      gender,
+      created_date
     from
       myapp_patient
     order by

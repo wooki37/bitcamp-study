@@ -19,6 +19,8 @@ public class Patient implements Serializable {
   private String phone;
   private char gender;
   private Date createdDate;
+  private String haru;
+  private String hadol;
 
   @Override
   public int hashCode() {
@@ -114,6 +116,22 @@ public class Patient implements Serializable {
 
   public void setCreatedDate(Date createdDate) {
     this.createdDate = createdDate;
+  }
+
+  public String getHaru() {
+    return haru;
+  }
+
+  public void setHaru(String haru) {
+    this.haru = haru;
+  }
+
+  public String getHadol() {
+    return haru;
+  }
+
+  public void setHadol(String hadol) {
+    this.hadol = hadol;
   }
 
 }

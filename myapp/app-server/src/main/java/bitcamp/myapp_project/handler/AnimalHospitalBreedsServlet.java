@@ -15,7 +15,7 @@ public class AnimalHospitalBreedsServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     Patient p = new Patient();
@@ -42,13 +42,28 @@ public class AnimalHospitalBreedsServlet extends HttpServlet {
     out.println("<h1>품종 선택</h1>");
     out.println("<form method='post' action='/getBreed'>");
     out.println("<label>품종을 선택해주세요:</label>");
-    out.println("<select name='breedType'>");
-    out.println("<option value='1'>강아지</option>");
-    out.println("<option value='2'>고양이</option>");
-    out.println("<option value='3'>직접입력</option>");
+    out.println("<select name='breedType' onchange='handleBreedTypeChange(this)'>");
+    out.println("<option value='강아지'>강아지</option>");
+    out.println("<option value='고양이'>고양이</option>");
+    out.println("<option value='직접입력'>직접입력</option>");
     out.println("</select>");
+    out.println(
+        "<input type='text' name='customBreed' id='customBreed' style='display:none;' placeholder='품종을 직접 입력하세요'>");
     out.println("<input type='submit' value='확인'>");
     out.println("</form>");
+
+    out.println("<script>");
+    out.println("function handleBreedTypeChange(selectElement) {");
+    out.println("    var customBreedInput = document.getElementById('customBreed');");
+    out.println("    if (selectElement.value === '직접입력') {");
+    out.println("        customBreedInput.style.display = 'block';");
+    out.println("        customBreedInput.setAttribute('required', 'required');");
+    out.println("    } else {");
+    out.println("        customBreedInput.style.display = 'none';");
+    out.println("        customBreedInput.removeAttribute('required');");
+    out.println("    }");
+    out.println("}");
+    out.println("</script>");
 
     try {
       AHInitServlet.patientDao.insert(p);

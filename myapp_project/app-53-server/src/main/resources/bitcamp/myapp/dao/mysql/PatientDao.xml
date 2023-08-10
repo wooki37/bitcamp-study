@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitcamp.myapp_project.dao.PatientDao">
+
+  <!-- 결과 레코드의 컬럼 값을 자바 객체에 어떻게 담을 것인지 설정한다. -->
+  <resultMap type="bitcamp.myapp_project.vo.Patient" id="patientMap">
+    <id     column="patient_no"   property="patientNo"/>
+    <result column="parent_no"    property="parentNo"/>
+    <result column="name"         property="name"/>
+    <result column="breeds"       property="breeds"/>
+    <result column="age"          property="age"/>
+    <result column="address"      property="address"/>
+    <result column="phone"        property="phone"/>
+    <result column="gender"       property="gender"/>
+    <result column="created_date" property="createdDate"/>
+  </resultMap>
+
+  <insert id="insert" parameterType="bitcamp.myapp_project.vo.Patient">
+    insert into myapp_patient(parent_no,name,breeds,age,address,phone,gender)
+    values(#{parentNo},#{name},#{breeds},#{age},#{address},#{phone},#{gender})
+  </insert>
+
+  <select id="findAll" resultMap="patientMap">
+    select
+      patient_no,
+      parent_no,
+      name,
+      breeds,
+      age
+    from
+      myapp_patient
+    order by
+      parent_no desc
+  </select>
+
+  <select id="findBy" parameterType="int" resultMap="patientMap">
+    select
+      patient_no,
+      parent_no,
+      name,
+      breeds,
+      age,
+      address,
+      phone,
+      gender,
+      created_date
+    from
+      myapp_patient
+    where
+      patient_no=#{patientNo}
+  </select>
+  
+  <select id="findByPatientAndPhone" parameterType="bitcamp.myapp_project.vo.Patient" resultMap="patientMap">
+    select
+      patient_no,
+      parent_no,
+      name,
+      breeds,
+      age,
+      address,
+      phone,
+      gender,
+      created_date
+    from
+      myapp_patient
+    where
+      patient_no=#{patientNo}
+      and phone=#{phone}
+  </select>
+    
+  <update id="update" parameterType="bitcamp.myapp_project.vo.Patient">
+    update myapp_patient set
+      parent_no=#{parentNo},
+      name=#{name},
+      breeds=#{breeds},
+      age=#{age},
+      address=#{address},
+      phone=#{phone},
+      gender=#{gender}
+    where 
+      patient_no=#{patientNo}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from myapp_patient
+    where 
+      patient_no=#{patientNo}
+  </delete>
+</mapper>

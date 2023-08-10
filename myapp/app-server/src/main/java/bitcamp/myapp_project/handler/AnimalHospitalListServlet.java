@@ -18,7 +18,7 @@ public class AnimalHospitalListServlet extends HttpServlet {
   SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     response.setContentType("text/html;charset=UTF-8");
@@ -32,20 +32,22 @@ public class AnimalHospitalListServlet extends HttpServlet {
     out.println("<body>");
     out.println("<h1>동물병원 환자 목록</h1>");
     out.println("<div style='margin:5px;'>");
-    out.println("<a href='/patient/form.html'>새 환자</a>");
+    out.println("<a href='/patient/form.html'>새 환자 등록</a>");
     out.println("</div>");
     out.println("<table border='1'>");
     out.println("<thead>");
     out.println(
-        "  <tr><th>환자번호</th> <th>보호자번호</th> <th>이름</th> <th>품종</th> <th>나이</th> <th>주소</th> <th>성별</th> <th>등록일</th> </tr>");
+        "<tr><th>환자번호</th> <th>보호자번호</th> <th>이름</th> <th>품종</th> <th>나이</th> <th>주소</th> <th>성별</th> <th>등록일</th> </tr>");
     out.println("</thead>");
+    out.println("<tbody>");
 
     List<Patient> list = AHInitServlet.patientDao.findAll();
     for (Patient p : list) {
       out.printf(
-          "<tr> <td>%d</td>,<td>%d</td>,<td>%s</td>,<td>%s</td>,<td>%d</td>,<td>%s</td>,<td>%s</td>,<td>%d</td> </tr>\n",
-          p.getPatientNo(), p.getParentNo(), p.getName(), p.getBreeds(), p.getAge(), p.getAddress(),
-          p.getGender(), p.getCreatedDate());
+          "<tr> <td><a href='/patient/detail?patientNo=%d'>%d</a></td>,<td>%d</td>,<td>%s</td>,<td>%s</td>,<td>%d</td>,<td>%s</td>,<td>%s</td>,<td>%s</td> </tr>\n",
+          p.getPatientNo(), p.getPatientNo(), p.getParentNo(), p.getName(), p.getBreeds(),
+          p.getAge(), p.getAddress() != null ? p.getAddress() : "", p.getGender(),
+          (p.getCreatedDate() != null ? dateFormatter.format(p.getCreatedDate()) : ""));
     }
     out.println("</tbody>");
     out.println("</table>");

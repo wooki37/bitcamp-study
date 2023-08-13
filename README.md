@@ -533,6 +533,15 @@
 - 개인 프로젝트
   - DB 모델링 수행
 
+### 58일(8/11,금)
+
+- DB 모델링
+  - 물리모델링 실습
+  - Forward Engineering 방법
+- 개인 프로젝트
+  - DB 모델링 검토
+
+
   ### 웨일즈 화상회의
   https://whaleon.us/o/CSrtk1/001aa759f29c46b985e32dd8562f594a
   

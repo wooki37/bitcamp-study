@@ -9,7 +9,7 @@
 plugins {
 
     id 'java-library'
-    id 'eclipse-wtp'
+    //id 'eclipse-wtp'
 }
 
 repositories {
@@ -55,6 +55,7 @@ tasks.withType(JavaCompile) {
 }
 
 // eclipse 프로젝트 이름을 설정하기
+/*
 eclipse {
     project {
         name = "myapp-common"
@@ -65,3 +66,4 @@ eclipse {
         javaRuntimeName = "JavaSE-17"
     }
 }
+ */

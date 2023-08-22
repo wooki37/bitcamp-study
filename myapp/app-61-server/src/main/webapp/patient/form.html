@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>우리동물사랑병원</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .container {
+    text-align: center;
+  }
+  form {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+</style>
+<script>
+  function handleBreedsOptionChange(selectElement) {
+    var breedsCustomInput = document.querySelector('[name="breeds_custom"]');
+    if (selectElement.value === '직접입력') {
+      breedsCustomInput.style.display = 'block';
+      breedsCustomInput.setAttribute('required', 'required');
+    } else {
+      breedsCustomInput.style.display = 'none';
+      breedsCustomInput.removeAttribute('required');
+      breedsCustomInput.value = '';
+    }
+  }
+</script>
+</head>
+<body>
+<div class="container">
+  <h1 style="margin-top: 0;">환자 등록</h1>
+  <form action='/patient/add' method="post">
+  <table border="0">
+  <tr>
+    <th>보호자번호</th> <td><input type='text' name='parentNo'></td>
+  </tr>
+  <tr>
+    <th>환자명</th> <td style="width:200px;"><input type='text' name='name'></td>
+  </tr>
+  <tr>
+    <th>품종</th> 
+    <td>
+      <label><input type="radio" name="breeds" value="강아지" onchange="handleBreedsOptionChange(this)"> 강아지</label>
+      <label><input type="radio" name="breeds" value="고양이" onchange="handleBreedsOptionChange(this)"> 고양이</label>
+      <label><input type="radio" name="breeds" value="직접입력" onchange="handleBreedsOptionChange(this)"> 직접입력</label>
+      <input type="text" name="breeds_custom" style="display: none;">
+    </td>
+  </tr>
+  <tr>
+    <th>나이</th> <td><input type='text' name='age'></td>
+  </tr>
+  <tr>
+    <th>주소</th> <td><input type='text' name='address'></td>
+  </tr>
+  <tr>
+    <th>전화번호(010)</th> <td><input type='text' name='phone'></td>
+  </tr>
+  <tr>
+    <th>성별</th> 
+    <td>
+      <select name="gender">
+        <option value="M">수컷</option>
+        <option value="W">암컷</option>
+      </select>  
+    </td>
+  </tr>
+  </table>
+  <button>등록</button>
+  </form>
+</div>
+</body>
+</html>

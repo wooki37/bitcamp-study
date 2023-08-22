@@ -7,18 +7,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import bitcamp.myapp.vo.AttachedFile;
 import bitcamp.myapp.vo.Board;
 
 @WebServlet("/board/detail")
 public class BoardDetailServlet extends HttpServlet {
+
   private static final long serialVersionUID = 1L;
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    Board board = InitServlet.boardDao.findBy(Integer.parseInt(request.getParameter("category")),
-        Integer.parseInt(request.getParameter("no")));
+    int category = Integer.parseInt(request.getParameter("category"));
+    int no = Integer.parseInt(request.getParameter("no"));
+
+    Board board = InitServlet.boardDao.findBy(category, no);
 
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
@@ -29,13 +33,16 @@ public class BoardDetailServlet extends HttpServlet {
     out.println("<title>게시글</title>");
     out.println("</head>");
     out.println("<body>");
+
+    request.getRequestDispatcher("/header").include(request, response);
+
     out.println("<h1>게시글</h1>");
 
     if (board == null) {
       out.println("<p>해당 번호의 게시글이 없습니다!</p>");
 
     } else {
-      out.println("<form action='/board/update' method='post'>");
+      out.println("<form action='/board/update' method='post' enctype='multipart/form-data'>");
       out.printf("<input type='hidden' name='category' value='%d'>\n", board.getCategory());
       out.println("<table border='1'>");
       out.printf("<tr><th style='width:120px;'>번호</th>"
@@ -49,6 +56,16 @@ public class BoardDetailServlet extends HttpServlet {
       out.printf("<tr><th>작성자</th> <td>%s</td></tr>\n", board.getWriter().getName());
       out.printf("<tr><th>조회수</th> <td>%s</td></tr>\n", board.getViewCount());
       out.printf("<tr><th>등록일</th> <td>%tY-%1$tm-%1$td</td></tr>\n", board.getCreatedDate());
+      out.println("<tr><th>첨부파일</th><td>");
+
+      for (AttachedFile file : board.getAttachedFiles()) {
+        out.printf(
+            "<a href='https://kr.object.ncloudstorage.com/bitcamp-nc7-bucket-12/board/%s'>%1$s</a>"
+                + " [<a href='/board/file/delete?category=%d&no=%d'>삭제</a>]" + "<br>\n",
+            file.getFilePath(), category, file.getNo());
+      }
+      out.println("<input type='file' name='files' multiple>");
+      out.println("</td></tr>");
       out.println("</table>");
 
       out.println("<div>");
@@ -68,6 +85,7 @@ public class BoardDetailServlet extends HttpServlet {
         InitServlet.sqlSessionFactory.openSession(false).rollback();
       }
     }
+    request.getRequestDispatcher("/footer").include(request, response);
 
     out.println("</body>");
     out.println("</html>");

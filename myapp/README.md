@@ -362,3 +362,32 @@
 - JavaEE 버전 별 하위 기술 버전
 - JavaEE 구현 서버 및 Servlet 컨테이너 관계
 - Servlet API 사용법
+
+## 57. 파일 업로드 다루기 - multipart/form-data POST 요청 파라미터 인코딩
+
+- apache.org의 라이브러리를 이용하여 multipart/form-data 파라미터를 다루는 방법
+- Servlet API를 이용하여 multipart/form-data 파라미터를 다루는 방법
+- 네이버클라우드 mysql DBMS 사용하기
+
+## 58. 파일 업로드 다루기 II - multipart/form-data POST 요청 파라미터 인코딩
+
+- Servlet API를 이용하여 multipart/form-data 파라미터를 다루는 방법
+
+## 59. 서블릿 컨테이너 삽입하기
+
+- 웹 애플리케이션에 서블릿 컨테이너를 포함시키는 방법
+
+## 60. 첨부파일을 네이버 클라우드의 스토리지 서비스에 저장하기
+
+- 네이버 스토리지 서비스 사용법
+- 첨부파일을 스토리지 서비스에 업로드하는 방법
+
+## 61. 네이버 클라우드의 Image Optimizer를 이용하여 썸네일 이미지 다루기
+
+- 네이버 클라우드의 Image Optimizer 사용법
+
+## 62. forward/include/refresh/redirect 다루기
+
+- 오류 메시지 출력에 forward 및 refresh 사용하기
+- 상단 메뉴 및 하단 정보 출력에 include 사용하기
+- 등록 완료 후 목록 페이지로 이동할 때 redirect 사용하기

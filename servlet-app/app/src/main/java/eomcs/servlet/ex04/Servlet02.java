@@ -1,13 +1,13 @@
 // 클라이언트가 보낸 데이터 읽기 - POST 요청 데이터 읽기
 package eomcs.servlet.ex04;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/ex04/s2")
 public class Servlet02 extends GenericServlet {
@@ -36,7 +36,7 @@ public class Servlet02 extends GenericServlet {
     // 클라이언트가 보낸 한글을 읽을 때 깨지는 문제 해결?
     // => 다음 코드의 주석을 풀고 테스트 해보라!
     // 정상적으로 잘 출력될 것이다.
-    req.setCharacterEncoding("UTF-8");
+    //req.setCharacterEncoding("UTF-8");
 
     // => 원리
     // getParameter()를 최초로 호출하기 전에 먼저

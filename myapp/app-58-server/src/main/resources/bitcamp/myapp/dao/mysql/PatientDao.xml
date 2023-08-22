@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitcamp.myapp_project.dao.PatientDao">
+
+  <!-- 결과 레코드의 컬럼 값을 자바 객체에 어떻게 담을 것인지 설정한다. -->
+  <resultMap type="bitcamp.myapp_project.vo.Patient" id="patientMap">
+    <id     column="patient_no"   property="patientNo"/>
+    <result column="parent_no"    property="parentNo"/>
+    <result column="name"         property="name"/>
+    <result column="breeds"       property="breeds"/>
+    <result column="age"          property="age"/>
+    <result column="address"      property="address"/>
+    <result column="phone"        property="phone"/>
+    <result column="gender"       property="gender"/>
+    <result column="created_date" property="createdDate"/>
+    
+    <collection property="attachedFiles" ofType="attachedFile">
+      <id     column="patient_file_no"    property="patientNo"/>
+      <result column="filepath"         property="filePath"/>
+    </collection>
+    
+  </resultMap>
+
+  <insert id="insert" parameterType="bitcamp.myapp_project.vo.Patient">
+    insert into myapp_patient(parent_no,name,breeds,age,address,phone,gender)
+    values(#{parentNo},#{name},#{breeds},#{age},#{address},#{phone},#{gender})
+  </insert>
+
+  <select id="findAll" resultMap="patientMap">
+    select
+      patient_no,
+      parent_no,
+      name,
+      breeds,
+      age,
+      address,
+      gender,
+      created_date
+    from
+      myapp_patient
+    order by
+      parent_no asc
+  </select>
+
+  <select id="findBy" parameterType="int" resultMap="patientMap">
+    select
+      patient_no,
+      parent_no,
+      name,
+      breeds,
+      age,
+      address,
+      phone,
+      gender,
+      created_date,
+      f.patient_file_no,
+      f.filepath
+    from
+      myapp_patient
+      left outer join myapp_patient_file f on p.patient_no=f.patient_no
+    where
+      patient_no=#{patientNo}
+  </select>
+  
+  <select id="findByPatientAndPhone" parameterType="bitcamp.myapp_project.vo.Patient" resultMap="patientMap">
+    select
+      patient_no,
+      parent_no,
+      name,
+      breeds,
+      age,
+      address,
+      phone,
+      gender,
+      created_date
+    from
+      myapp_patient
+    where
+      patient_no=#{patientNo}
+      and phone=#{phone}
+  </select>
+    
+  <update id="update" parameterType="bitcamp.myapp_project.vo.Patient">
+    update myapp_patient set
+      parent_no=#{parentNo},
+      name=#{name},
+      breeds=#{breeds},
+      age=#{age},
+      address=#{address},
+      phone=#{phone},
+      gender=#{gender}
+    where 
+      patient_no=#{patientNo}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from myapp_patient
+    where 
+      patient_no=#{patientNo}
+  </delete>
+  
+  <insert id="insertFiles" parameterType="bitcamp.myapp_project.vo.Patient">
+  insert into myapp_project_file(filepath, patient_no)
+  values
+  <foreach collection="attachedFiles" item="file" separator=",">(#{file.filePath}, #{patientNo})
+  </foreach>
+  </insert>
+</mapper>
+
+
+
+

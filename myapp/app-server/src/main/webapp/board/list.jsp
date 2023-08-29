@@ -4,9 +4,8 @@
     contentType="text/html;charset=UTF-8"
     trimDirectiveWhitespaces="true"
     errorPage="/error.jsp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:set var="refresh" value="2;url=list.jsp?category=${param.category}" scope="request"/>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +18,7 @@
 
 <h1>게시글 목록</h1>
 <div style='margin:5px;'>
-<a href='/board/form.jsp?category=${param.category}'>새 글</a>
+<a href='/board/add?category=${param.category}'>새 글</a>
 </div>
 <table border='1'>
 <thead>
@@ -33,7 +32,7 @@
 <c:forEach items="${list}" var="board">
     <tr>
       <td>${board.no}</td>
-      <td><a href='/board/detail.jsp?category=${board.category}&no=${board.no}'>
+      <td><a href='/board/detail?category=${board.category}&no=${board.no}'>
         ${board.title.length() > 0 ? board.title : "제목없음"}
         </a>
       </td>

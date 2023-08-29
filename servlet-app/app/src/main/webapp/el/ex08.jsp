@@ -1,4 +1,4 @@
-<%@page import="com.eomcs.web.vo.Member"%>
+<%@page import="eomcs.vo.Member"%>
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
@@ -22,7 +22,7 @@ pageContext.setAttribute("member", member);
 %>
 
 ${member.getNo()}<br>
-${member.no}<br>
+${member.no}<br>    <%-- oznl 표기법 --%>
 ${member["no"]}<br>
 ${member['no']}<br>
 

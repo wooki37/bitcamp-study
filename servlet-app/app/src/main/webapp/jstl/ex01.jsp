@@ -47,12 +47,12 @@
 <h2>오호라!!!</h2>
 
 <%
-out.println("<h2>오호라!!!</h2>");
+out.println("<h2>오호라!!!</h2>"); <%-- script lib --%>
 %>
 
-<%="<h2>오호라!!!</h2>"%>
+<%="<h2>오호라!!!</h2>"%>  <%-- expresstion element --%>
 
-${"<h2>오호라!!!</h2>"}
+${"<h2>오호라!!!</h2>"}    <%-- expresstion language --%>
 
 <c:out value="<h2>오호라!!!<h2>"/>
 

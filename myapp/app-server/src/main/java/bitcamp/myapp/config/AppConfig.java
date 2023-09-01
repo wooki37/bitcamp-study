@@ -31,7 +31,7 @@ public class AppConfig {
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource, ApplicationContext appCtx) throws Exception {
       System.out.println("AppConfig.sqlSessionFactory() 호출됨!");
-
+      org.apache.ibatis.logging.LogFactory.useLog4J2Logging();
       SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
       factoryBean.setDataSource(dataSource);
       factoryBean.setTypeAliasesPackage("bitcamp.myapp.vo");

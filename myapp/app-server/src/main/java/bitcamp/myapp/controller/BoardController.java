@@ -11,9 +11,12 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/board")
 public class BoardController {
 
     {
@@ -25,12 +28,12 @@ public class BoardController {
     @Autowired
     NcpObjectStorageService ncpObjectStorageService;
 
-    @RequestMapping("/board/form")
+    @GetMapping("form")
     public String form() {
         return "/WEB-INF/jsp/board/form.jsp";
     }
 
-    @RequestMapping("/board/add")
+    @PostMapping("add")
     public String add(
             Board board,
             Part[] files,
@@ -67,7 +70,7 @@ public class BoardController {
         }
     }
 
-    @RequestMapping("/board/delete")
+    @GetMapping("delete")
     public String delete(
             int no,
             int category,
@@ -95,7 +98,7 @@ public class BoardController {
         }
     }
 
-    @RequestMapping("/board/detail")
+    @GetMapping("detail")
     public String detail(
             int no,
             int category,
@@ -114,7 +117,7 @@ public class BoardController {
         }
     }
 
-    @RequestMapping("/board/list")
+    @GetMapping("list")
     public String list(
             int category,
             Map<String,Object> model) throws Exception {
@@ -128,7 +131,7 @@ public class BoardController {
         }
     }
 
-    @RequestMapping("/board/update")
+    @PostMapping("update")
     public String update(
             Board board,
             Part[] files,
@@ -166,7 +169,7 @@ public class BoardController {
             throw e;
         }
     }
-    @RequestMapping("/board/fileDelete")
+    @GetMapping("fileDelete")
     public String fileDelete(
             int no,
             Map<String,Object> model,
